@@ -1,0 +1,70 @@
+#recipeinfo {
+  // 影片食譜用
+  .v-carousel__controls {
+    pointer-events: none;
+  }
+  @media (max-width: 600px) {
+    .v-carousel,iframe {
+      max-height: 32vh;
+    }
+  }
+  .botnav{
+    position:fixed;
+    width:90%;
+    bottom:25px;
+    left: auto;
+  }
+  
+  .square{
+    padding: 0;
+    min-width: 28px;
+  }
+  .msgdate{
+    position:absolute;
+    right: 3%;
+    bottom: 3%;
+  }
+  .timeheight{
+    height: 36px;
+    line-height: 36px;
+    position:relative;
+  }
+  .timecaption{
+    position: absolute;
+    right: 15px;
+    bottom: 5px;
+  }
+  
+  .spacing{
+    letter-spacing: 0.5rem;
+  }
+  
+}
+#recipeinfo .v-speed-dial {
+  position: fixed;
+  right: 14%;
+  bottom: 10%;
+}
+
+#recipeinfo .v-btn--floating {
+  position: fixed;
+}
+
+#recipeinfo .v-speed-dial  .floatbtn{
+  background: rgba( 155, 155, 155, 0.75 );
+  box-shadow: 0 8px 32px 0 rgba(33, 31, 135, 0.151);
+  backdrop-filter: blur( 6.5px );
+  -webkit-backdrop-filter: blur( 6.5px );
+  border-radius: 50%;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  color:white;
+}
+#recipeinfo .v-speed-dial  .floatsm{
+  background: rgba( 255, 255, 255, 0.75 );
+  box-shadow: 0 8px 32px 0 rgba(47, 31, 135, 0.144);
+  backdrop-filter: blur( 6.5px );
+  -webkit-backdrop-filter: blur( 6.5px );
+  border-radius: 50%;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  color:grey;
+}

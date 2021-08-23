@@ -1,0 +1,19 @@
+#recipecard{
+  .imgheight{
+    height: 320px;
+  }
+  .recipetitle{
+    font-size: 1.1rem;
+    font-weight: 900;
+  }
+  
+  div[class=v-responsive__content]:last-child{
+    background-image: linear-gradient(152deg, rgba(0,0,0,0.08), transparent 22%);
+  }
+
+  @media (min-width: 960px) and (max-width: 1264px) {
+    .imgheight{
+      height: 250px;
+    }
+  }
+}

@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400;500;600;700;900&display=swap');
+@import './app.scss';
+@import './recipes.scss';
+@import './recipecard.scss';
+@import './products.scss';
+@import './productInfo.scss';
+@import './posts.scss';
+@import './postinfo.scss';
+@import './recipeinfo.scss';
+@import './new.scss';
+@import './orders.scss';
+@import './cart.scss';
+@import './checkout.scss';
+@import './userpage.scss';
+@import './questions.scss';
+
+body{
+  overflow-y: hidden !important;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+// recipes-filter 食譜分類中使用
+input[type=checkbox] {
+  display: none;
+}
+
+div[role=menu] {
+  border-radius: 25px !important;
+}
+
+.single-line{
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.font-h2{
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+.font-h3{
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.font-h4{
+  font-size: 1rem;
+  font-weight: 700;
+}
+.font-h5{
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.orangetext{
+  color: #DEA56A;
+}
+
+
+.orangebtn{
+  border: 1px solid #DEA56A;
+  background: #DEA56A !important;
+  color: white !important;
+}
+
+.orangebtn:hover{
+  background-color: #e0b07d;
+}
+.orangebtn-border{
+  border: 1px solid #DEA56A;
+  background: white !important;
+}
+
+
+#app{
+  // register, login 頁面共用 btn
+  .loginbtn{
+    border-color: #DEA56A;
+    background-color: #DEA56A;
+    color:white;
+    font-size: 1.1rem;
+    letter-spacing: 0.5rem;
+    font-weight: 700;
+    min-width: 200px;
+  }
+  .header-title{
+    letter-spacing: 12px;
+  }
+}
+
+
+$mainBlue: #292A40;
+
+
+a:-webkit-any-link {
+  text-decoration: none;
+}
+
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: .5;
+  position: absolute;
+  width: 100%;
+}
+

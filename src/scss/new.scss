@@ -1,0 +1,61 @@
+#new{
+  .font-h2{
+    font-size: 1.4rem;
+    font-weight: 900;
+  }
+  .font-h3{
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .typebtn{
+    border: 1px solid rgb(175, 175, 175);
+    color: #575757;
+    font-weight: 700;
+  }
+  .typebtn-active{
+    border: 1px solid #DEA56A;
+    background: #DEA56A;
+    color: white;
+    font-weight: 700;
+  }
+  .chips{
+    min-width: 32px;
+    min-height: 18px;
+    font-size: 1rem;
+    border: 1px solid rgb(175, 175, 175);
+  }
+  
+  .chips-active{
+    border: 1px solid #DEA56A;
+    background: #DEA56A !important;
+    color: white;
+  }
+  
+  .stepcard{
+    border: 1px solid #DEA56A;
+    background: transparent;
+  }
+  
+  .nextbtn{
+    border: 1px solid #DEA56A;
+    background: white;
+  }
+  
+  .orangebtn{
+    border: 1px solid #DEA56A;
+    background: #DEA56A;
+    color: white;
+  }
+  
+  @media (max-width: 600px) {
+    .font-h2{
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+    .font-h3{
+      font-size: 1rem;
+      font-weight: 700;
+    }
+  }
+  
+}

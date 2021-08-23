@@ -1,0 +1,31 @@
+#orders{
+  .ordertable{
+    width: 100%;
+    text-align: left;
+  }
+  table{
+    border-collapse: collapse;
+    border:1px solid #DEA56A;
+  }
+  table tr{
+    height:35px;
+  }
+  table tr:nth-child(1){
+    background-color: #DEA56A;
+    border:1px solid #DEA56A;
+    color:white;
+  }
+  table tr:nth-child(2){
+    background-color: white;
+    border:1px solid #DEA56A;
+  }
+  table tr th:nth-child(1){
+    width: 30%;
+  }
+  table tr th:nth-child(2){
+    width: 50%;
+  }
+  table tr th:nth-child(3),table tr th:nth-child(4){
+    width: 10%;
+  }
+}

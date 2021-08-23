@@ -1,0 +1,118 @@
+#app {
+  position: relative;
+  
+  .header-banner{
+    width: 100%;
+    height: 24px;
+  }
+  
+  
+  .vh-100{
+    min-height: 100vh;
+  }
+  
+  .bg-white-2{
+    background: rgba(249,249,249);
+  }
+  
+  .navshadow{
+    box-shadow: 0px -4px 8px -4px rgba(0,0,0,0.1);
+  }
+  .navigation-wrapper{
+    // background: rgba(133, 160, 175, 0.41);
+    border-bottom: 1px solid #ccc;
+  }
+  .navlist{
+    position: relative;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #000000e0;
+    transition: 0.5s ease;
+  }
+  .navlist:hover{
+    position: relative;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #DEA56A;
+    border-bottom: 1px solid #DEA56A;
+  }
+  .navlist:active{
+    position: relative;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #DEA56A;
+    border-bottom: 1px solid #DEA56A;
+  }
+  .searchbar{
+    width: 150px;
+    height: 34px;
+    background: rgb(245, 245, 245);
+    
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: rgba(136, 127, 127, 0.774);
+      opacity: 1; /* Firefox */
+    }
+    
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: rgba(136, 127, 127, 0.774);
+    }
+    
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      color: rgba(136, 127, 127, 0.774);
+    }
+    
+    input{
+      color: rgba(136, 127, 127, 0.774);
+      width: 65%;
+      outline: 0;
+    }
+    
+  }
+  
+  .appmenu{
+    z-index: 3;
+    position: fixed;
+    bottom:15px;
+    left:50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height:55px;
+    border-radius: 3rem;
+    
+    .applist{
+      width: 20%;
+      height:100%;
+    }
+    .v-icon::after {
+      background-color: orange;
+    }
+  }
+  
+  .menudwr{
+    z-index: 2;
+    width: 100%;
+    max-height: 100%;
+    .btnborder{
+      background: white;
+      border: 1px solid rgb(220, 220, 220);
+    }
+    .iconcircle{
+      background: rgb(240, 240, 240);
+      border-radius: 50%;
+    }
+  }
+  
+  .topline{
+    transform: translateY(-120%);
+    background-color: white;
+    z-index: 4;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+
+}

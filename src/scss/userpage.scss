@@ -1,0 +1,27 @@
+#userpage{
+  div[class=v-responsive__content]:last-child{
+    background-image: linear-gradient(152deg, rgba(0,0,0,0.08), transparent 22%);
+  }
+  .recipetab{
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 0.5rem;
+    cursor: pointer;
+  }
+
+}
+#userinfo{
+  .pointer,.filepond--drop-label.filepond--drop-label label {
+    cursor: pointer;
+  }
+  .filepond--root {
+    width:100px;
+    height:100px;
+    margin:auto;
+  }
+  .filepond--drop-label {
+    color: #555;
+    font-size: 0.2rem;
+    cursor: pointer;
+  }
+}

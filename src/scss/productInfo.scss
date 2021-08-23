@@ -1,0 +1,93 @@
+#productinfo{
+  .bg-white-2{
+    background: rgb(249, 247, 245);
+  }
+  .bgtrans{
+    background-color: transparent;
+  }
+  .ctitle{
+    letter-spacing: 12px;
+  }
+  .circle{
+    border-radius: 50%; 
+   }  
+  .name{
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    line-height: 2rem;
+  }
+  .distext{
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1rem;
+    letter-spacing: 1px;
+    color: #DEA56A;
+  }
+  .detail{
+    font-size: 16px;
+  }
+  
+  .theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot fieldset, .theme--light.v-icon {
+    color: #DEA56A;
+  }
+  .v-text-field fieldset, .v-text-field .v-input__control, .v-text-field .v-input__slot {
+    border-radius: 0;
+  }
+  
+  .v-text-field--filled.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--filled.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--filled.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot {
+    min-height: 42px;
+  }
+  .v-text-field--outlined, .v-input--dense > .v-input__control > .v-input__slot {
+    margin-bottom: 0px;
+  }
+  .v-text-field.v-text-field--enclosed .v-text-field__details{
+    position: absolute;
+  }
+  .v-text-field.v-text-field--solo .v-input__control input {
+    text-align: center;
+  }
+  
+  .numtext{
+    font-weight: 900;
+  }
+  
+  .btnborder {
+    border-radius: 0;
+    height: 35px;
+    width: 100%;
+    position: relative;
+    font-size: 16px;
+    font-weight: 900;  
+    .bagtext{
+      width: 60%;
+      letter-spacing: 2.5px;
+      letter-spacing: 4px;  
+      border-color: #DEA56A;
+      border-width: 1px 0px 1px 1px;
+      border-style: solid;
+      background-color: #DEA56A;
+      color: white;
+      transition: 0.3s ease;
+    }
+    .bagtext:hover{
+      background-color: #e0b07d;
+    }
+    .pricetext{
+      width:40%;
+      border-color: #DEA56A;
+      letter-spacing: 1px;  
+      border-width: 1px;
+      border-style: solid;
+      background: white;
+    }
+  }
+  @media (max-width: 600px) {
+    .bagtext{
+      font-size: 14px;
+    }
+    .pricetext{
+      font-size: 14px;
+    }
+  }
+}

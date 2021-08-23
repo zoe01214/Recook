@@ -1,0 +1,121 @@
+#recipes{
+  .searchbar-big{
+    width: 50%;
+    height: 34px;
+    background: rgb(245, 245, 245);
+    
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: rgba(136, 127, 127, 0.774);
+      opacity: 1; /* Firefox */
+    }
+    
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: rgba(136, 127, 127, 0.774);
+    }
+    
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      color: rgba(136, 127, 127, 0.774);
+    }
+    
+    input{
+      color: rgba(136, 127, 127, 0.774);
+      width: 100%;
+      outline: 0;
+    }
+  }
+  .selectborder{
+    background: white;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+  .custom-btn{
+    position: relative;
+    cursor: pointer;
+    .selectbox{
+      width: 100%;
+      cursor: pointer;
+      font-weight: bold;
+      border: 1px solid rgb(220, 220, 220);
+      border-radius: 10px;
+      outline: 0;
+      position: relative;
+    }
+    .lefticon{
+      position: absolute;
+      top: 7px;
+      right: 10px;
+      pointer-events: none;
+    }
+    .righticon{
+      position: absolute;
+      top: 7px;
+      left: 10px;
+      pointer-events: none;
+    }
+    .leftbtn{
+      padding: 6px 40px 6px 10px;
+    }
+    .rightbtn{
+      padding: 6px 10px 6px 40px;
+    }
+  }
+  .relative{
+    position: relative;
+  }
+  .pointer{
+    cursor: pointer;
+  }
+  .chips{
+    height: 38px;
+    border: 1px solid rgb(220, 220, 220);
+    background: rgb(220, 220, 220);
+    border-radius: 10px;
+  }
+  .kind-active{
+    border: 2px solid rgb(253, 204, 99);
+  }
+  .icon-all{
+    height: 24px;
+    width: 24px;
+    font-size: 0.8rem;
+    line-height: 25px;
+    font-weight: 800;
+  }
+  
+  .lowercase{
+    text-transform:lowercase;
+  }
+  
+  @media (max-width: 600px) {
+    .searchbar-big{
+      width: 80%;
+    }
+  }
+}
+// recipes-filter 食譜分類中使用
+.checktext{
+  cursor: pointer;
+  user-select: none;
+  .checkbox-default{
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    user-select: none;
+    font-size:14px;
+  }
+  .checkbox-check{
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border-radius: 5px;
+    background: rgb(50, 50, 50);
+    color: white;
+    border: 1px solid rgb(50, 50, 50);
+    user-select: none;
+    font-size:12px;
+    text-indent: -1px;
+  }
+}

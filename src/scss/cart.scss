@@ -1,0 +1,40 @@
+#cart{
+  .circle{
+    border-radius: 50%; 
+   }
+   
+  .trans{
+    background: transparent;
+    width: 100%;
+  }
+  
+  .mainorange{
+    color: #DEA56A;
+  }
+
+
+  .theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot fieldset, .theme--light.v-icon {
+    color: #DEA56A;
+  }
+  .v-text-field fieldset, .v-text-field .v-input__control, .v-text-field .v-input__slot {
+    border-radius: 0;
+  }
+  
+  .v-text-field--filled.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--filled.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--filled.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot {
+    min-height: 42px;
+  }
+  .v-text-field--outlined, .v-input--dense > .v-input__control > .v-input__slot {
+    margin-bottom: 0px;
+  }
+  .v-text-field.v-text-field--enclosed .v-text-field__details{
+    position: absolute;
+  }
+  .v-text-field.v-text-field--solo .v-input__control input {
+    text-align: center;
+  }
+  
+  .numtext{
+    font-weight: 900;
+  }
+  
+}

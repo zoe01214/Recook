@@ -1,0 +1,38 @@
+#postinfo{
+  .bg-white-2{
+    background: rgb(249, 247, 245);
+  }
+  .infotitle{
+    letter-spacing: 3px;
+    font-weight: 600;
+  }
+  
+  .content{
+    letter-spacing: 1px;
+    line-height: 1.7;
+    white-space: 1px;
+  }
+  .quotes{
+    position: relative;
+  }
+  .quotes::before{
+    position: absolute;
+    content: open-quote;
+    font-size: 3rem;
+    color: #DEA56A;
+    left: 1.1rem;
+    top: 0.8rem;
+  }
+  .quotes::after{
+    position: absolute;
+    content: close-quote;
+    font-size: 3rem;
+    color: #DEA56A;
+    right: 1.1rem;
+    bottom: 0rem;
+  }
+  .date{
+    font-size: 0.9rem;
+    letter-spacing: 0.3rem;
+  }
+}

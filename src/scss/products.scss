@@ -1,0 +1,65 @@
+#products{
+  .bg-white-2{
+    background: rgb(249, 247, 245);
+  }
+  .bgtrans{
+    background-color: transparent;
+  }
+  .circle{
+    border-radius: 50%; 
+   }  
+  .name{
+    font-size: 20px;
+    font-weight: 900;
+  }
+  .shcut {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; //行數
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    font-size: 15px !important;
+    line-height: 1.4rem;
+    color: #333;
+  }
+  
+  .btnborder {
+    border-radius: 0;
+    height: 35px;
+    width: 100%;
+    position: relative;
+    font-size: 1rem;
+    font-weight: 900;  
+    .bagtext{
+      width: 60%;
+      letter-spacing: 2.5px;
+      letter-spacing: 4px;  
+      border-color: #DEA56A;
+      border-width: 1px 0px 1px 1px;
+      border-style: solid;
+      white-space: nowrap;
+      background-color: #DEA56A;
+      color: white;
+      transition: 0.3s ease;
+    }
+    .bagtext:hover{
+      background-color: #e0b07d;
+    }
+    .pricetext{
+      width:40%;
+      border-color: #DEA56A;
+      letter-spacing: 1px;
+      border-width: 1px;
+      white-space: nowrap;
+      border-style: solid;
+      background: white;
+    }
+  }
+  @media (max-width: 600px) {
+    .bagtext{
+      font-size: 14px;
+    }
+    .pricetext{
+      font-size: 14px;
+    }
+  }
+}

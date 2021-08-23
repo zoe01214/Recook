@@ -1,0 +1,33 @@
+#posts{
+  .bg-white-2{
+    background: rgb(249, 247, 245);
+  }
+  .bgtrans{
+    background-color: transparent;
+  }
+  .ctitle{
+    letter-spacing: 12px;
+  }
+  .tag{
+    background-color: rgb(251, 220, 197);
+    font-weight: 600;
+    letter-spacing: 6px;
+  }
+  
+  .ptitle{
+    display: -webkit-box;
+    -webkit-line-clamp: 2; //行數
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow:hidden;
+  }
+  
+  .content{
+    display: -webkit-box;
+    -webkit-line-clamp: 5; //行數
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow:hidden;
+  }
+  
+}
