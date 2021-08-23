@@ -11,6 +11,7 @@
     "@mdi/js": "^5.9.55",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "filepond": "^4.29.0",
     "filepond-plugin-drag-reorder": "^1.0.1",
     "filepond-plugin-file-validate-type": "^1.2.6",
     "filepond-plugin-image-crop": "^2.0.6",
