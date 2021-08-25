@@ -29,9 +29,7 @@ export default ({
         { name: '評論管理', to: '/reportmanage' },
         { name: '貼文管理', to: '/postmanage' },
         { name: '商品管理', to: '/productmanage' },
-        { name: '訂單管理', to: '/ordermanage' },
-        { name: '前台管理', to: '/frontmanage' },
-        { name: '意見箱', to: '/recievemanage' }
+        { name: '訂單管理', to: '/ordermanage' }
       ]
     }
   }
