@@ -63,30 +63,22 @@ export default {
         }
         try {
           if (this.product.sell) {
-            if (this.amount <= this.quantity) {
-              await this.axios.post('/users/cart', { product: this.$route.params.id, amount: this.amount }, {
-                headers: {
-                  authorization: 'Bearer ' + this.$store.state.jwt.token
-                }
-              })
-              this.$swal({
-                icon: 'success',
-                title: '成功',
-                text: '成功購物車'
-              })
-              const newdata = await this.axios.get('/users/cart', {
-                headers: {
-                  authorization: 'Bearer ' + this.$store.state.jwt.token
-                }
-              })
-              this.$store.commit('changecart', newdata.data.result)
-            } else {
-              this.$swal({
-                icon: 'error',
-                title: '錯誤',
-                text: '訂購數量超過庫存上限'
-              })
-            }
+            await this.axios.post('/users/cart', { product: this.$route.params.id, amount: this.amount }, {
+              headers: {
+                authorization: 'Bearer ' + this.$store.state.jwt.token
+              }
+            })
+            this.$swal({
+              icon: 'success',
+              title: '成功',
+              text: '成功購物車'
+            })
+            const newdata = await this.axios.get('/users/cart', {
+              headers: {
+                authorization: 'Bearer ' + this.$store.state.jwt.token
+              }
+            })
+            this.$store.commit('changecart', newdata.data.result)
           } else {
             this.$swal({
               icon: 'error',
