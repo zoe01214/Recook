@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/accountmanage~ordermanage~postmanage~productmanage~recipemanage~reportmanage.f3740a26.css"
   },
   {
-    "revision": "362899a38673803661a3",
-    "url": "css/app.3055d28f.css"
+    "revision": "a541b74eb4625a552253",
+    "url": "css/app.86ee6f29.css"
   },
   {
     "revision": "84ed629aa85a500d38a9",
@@ -32,11 +32,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/new.16619009.css"
   },
   {
-    "revision": "148450c2ce99df6bd1c1",
+    "revision": "9bd03ce9ac4280eddc31",
     "url": "css/postmanage.12a767db.css"
   },
   {
-    "revision": "91b65d0dd2194f9dd0ee",
+    "revision": "1ba5a4b8147b6f4fbd68",
     "url": "css/productmanage.acf7b02a.css"
   },
   {
@@ -44,7 +44,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/questions.606a46d3.css"
   },
   {
-    "revision": "2c68c049739e94d1a793",
+    "revision": "a2a6b1cf813ba12b1908",
     "url": "css/recipeinfo.7d8553dc.css"
   },
   {
@@ -52,7 +52,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/recipeinfo~userpage.8951a586.css"
   },
   {
-    "revision": "c10c69359f7801b7e419",
+    "revision": "35ae9ab372a23ba2a080",
     "url": "css/recipemanage.3a7d9f72.css"
   },
   {
@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/reportmanage.12a767db.css"
   },
   {
-    "revision": "c3a922029b4a8d19debe",
+    "revision": "d86c848f977fe83dfe81",
     "url": "css/userpage.70a8a29d.css"
   },
   {
@@ -224,7 +224,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/unionpay.7d585d0b.png"
   },
   {
-    "revision": "a4db9d0aab887c924905a0872c43b8b0",
+    "revision": "8d00df1cefc95a526da55882ffdf47ab",
     "url": "index.html"
   },
   {
@@ -252,8 +252,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/admin.cf5f9944.js"
   },
   {
-    "revision": "362899a38673803661a3",
-    "url": "js/app.81601e6c.js"
+    "revision": "a541b74eb4625a552253",
+    "url": "js/app.1ba35af0.js"
   },
   {
     "revision": "4f083c9d6782836f64a5",
@@ -292,20 +292,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/postinfo.ca9c895a.js"
   },
   {
-    "revision": "148450c2ce99df6bd1c1",
-    "url": "js/postmanage.87676bed.js"
+    "revision": "9bd03ce9ac4280eddc31",
+    "url": "js/postmanage.f76264b5.js"
   },
   {
-    "revision": "81d3682b3817cf2b32af",
-    "url": "js/posts.9f820e67.js"
+    "revision": "fa860dd4ee504a9c0601",
+    "url": "js/posts.01f1e159.js"
   },
   {
-    "revision": "91b65d0dd2194f9dd0ee",
-    "url": "js/productmanage.c7ad7fad.js"
+    "revision": "1ba5a4b8147b6f4fbd68",
+    "url": "js/productmanage.0a85d8a4.js"
   },
   {
-    "revision": "239b81ed65148943a868",
-    "url": "js/products.a81f74ba.js"
+    "revision": "c2b27b9c7f7ef30d4a49",
+    "url": "js/products.cacb160c.js"
   },
   {
     "revision": "5f1359582275750f6737",
@@ -316,20 +316,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/questions.82ef3a56.js"
   },
   {
-    "revision": "2c68c049739e94d1a793",
-    "url": "js/recipeinfo.39798db6.js"
+    "revision": "a2a6b1cf813ba12b1908",
+    "url": "js/recipeinfo.cee223bf.js"
   },
   {
     "revision": "19a83ff4ca3b7f89ba69",
     "url": "js/recipeinfo~userpage.eb5ef454.js"
   },
   {
-    "revision": "c10c69359f7801b7e419",
-    "url": "js/recipemanage.f46c7f35.js"
+    "revision": "35ae9ab372a23ba2a080",
+    "url": "js/recipemanage.08e80b53.js"
   },
   {
-    "revision": "e402817f5093f9a97e82",
-    "url": "js/recipes.e9adaa6c.js"
+    "revision": "ff7303edb7f69e29c024",
+    "url": "js/recipes.a6b4c977.js"
   },
   {
     "revision": "f854fbf2f915f3af8579",
@@ -340,8 +340,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/reportmanage.61f5eee4.js"
   },
   {
-    "revision": "c3a922029b4a8d19debe",
-    "url": "js/userpage.04d92044.js"
+    "revision": "d86c848f977fe83dfe81",
+    "url": "js/userpage.0f05fb2b.js"
   },
   {
     "revision": "43d51f76a826417ea66548f439c831c1",
