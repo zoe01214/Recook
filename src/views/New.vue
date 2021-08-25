@@ -1,7 +1,7 @@
 <template lang="pug">
 v-container#new(fluid).pa-0.px-lg-12.mb-12
   v-sheet.mx-3.px-lg-12.d-flex.align-center.mb-12
-    h2.header-title.mr-6 編輯食譜
+    h2.header-title.mr-6 新增食譜
     v-divider
   v-sheet.mx-3.mx-lg-10.pa-8.rounded-xl.bg-white-2.mt-12
     v-card(flat).bg-white-2.bgtrans.pa-3.pa-lg-12
