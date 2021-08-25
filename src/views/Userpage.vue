@@ -123,6 +123,7 @@ v-container(fluid)#userpage.pa-0.px-lg-12.mb-12
           v-col(cols="6" md="4" lg="3" v-for="(recipe,index) in author.favorites" :key="recipe._id")
             router-link(:to="'/recipe/'+recipe._id")
               UserRecipe(:recipe="recipe" :nowuser="nowuser" v-show="recipe.isEnabled !== 0" @sendlike="like (index)" @sendfav="favorite (index)")
+  loading(:height="45" :width="45" :active.sync="isLoading")
 </template>
 
 <script>
@@ -164,7 +165,9 @@ export default {
       flwdialog: false,
       dialog: false,
       tab: null,
-      recipetab: 'recipe'
+      recipetab: 'recipe',
+      isLoading: false,
+      fullPage: true
     }
   },
   components: {
@@ -391,6 +394,8 @@ export default {
   },
   async mounted () {
     try {
+      const vm = this
+      vm.isLoading = true
       const { data } = await this.axios.get('/users/' + this.$route.params.id)
       this.author = {
         account: data.result.account,
@@ -508,6 +513,7 @@ export default {
           }
         }
       }
+      vm.isLoading = false
     } catch (error) {
       this.$router.push('/')
     }

@@ -80,6 +80,17 @@ div[role=menu] {
   background-color: #e0b07d;
 }
 
+.imagecard{
+  position: relative;
+  .btnclose{
+    background: rgba(0,0,0,0.8);
+  }
+  .btnclose:hover{
+    background: rgba(0,0,0,0.8);
+    border:2px solid white;
+  }
+}
+
 #app{
   // register, login 頁面共用 btn
   .loginbtn{

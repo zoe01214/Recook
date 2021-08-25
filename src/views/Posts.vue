@@ -13,7 +13,7 @@ v-container(fluid)#posts.pa-0.px-lg-12.mb-12
               v-sheet.rounded.mx-12.mb-4.tag {{item.type}}
               h3.mb-2.ptitle {{item.title}}
               div.content(v-html="item.content")
-  loading(:active.sync="isLoading")
+  loading(:height="45" :width="45" :active.sync="isLoading")
 </template>
 
 <script>

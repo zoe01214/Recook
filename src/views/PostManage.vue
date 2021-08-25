@@ -17,6 +17,10 @@ v-container#postmanage.pa-4
                       v-text-field(v-model="editedItem.title" label="標題")
                       v-select(v-model="editedItem.type" :items="types" label="文章類型")
                       vue-editor(v-model="editedItem.content")
+                      v-sheet.rounded-lg.imagecard(width="100%" v-show="image.length !== 0")
+                        v-img.rounded-lg(contain height="200" :src="image[0]")
+                        v-btn.btnclose(icon absolute top right @click="delimage")
+                          v-icon.white--text mdi-close
                       file-pond(
                         name="pond"
                         ref="pond"
@@ -80,7 +84,8 @@ export default ({
         content: '',
         isEnabled: 1
       },
-      types: ['美食生活', '料理生活', '健康生活', '其他生活']
+      types: ['美食生活', '料理生活', '健康生活', '其他生活'],
+      image: []
     }
   },
   computed: {
@@ -92,6 +97,8 @@ export default ({
     editItem (item) {
       this.editedIndex = this.posts.indexOf(item)
       this.editedItem = Object.assign({}, item)
+      this.editedItem.image = []
+      this.image = this.posts[this.editedIndex].image
       this.dialog = true
     },
     close () {
@@ -192,6 +199,22 @@ export default ({
     },
     handleFilePondUpdateFile (files) {
       this.editedItem.image = files.map(files => files.file)
+    },
+    async delimage () {
+      try {
+        await this.axios.patch('/posts/delimage/' + this.posts[this.editedIndex]._id, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.state.jwt.token
+          }
+        })
+        this.image = []
+      } catch (error) {
+        this.$swal({
+          icon: 'error',
+          title: '錯誤',
+          text: '刪除商品圖片錯誤'
+        })
+      }
     }
   },
   async mounted () {

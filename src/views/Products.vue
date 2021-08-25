@@ -17,7 +17,7 @@ v-container(fluid)#products.pa-0.px-lg-12.mb-12
               v-sheet.btnborder.d-flex.align-center.text-center.bgtrans
                 div(:style="greyoutline(item.quantity)").pa-2.pricetext NT.{{item.price}}
                 button(@click.prevent="addcart(item._id)" :style="outofstock(item.quantity)").pa-2.bagtext {{outofstocktext(item.quantity)}}
-  loading(:active.sync="isLoading")
+  loading(:height="45" :width="45" :active.sync="isLoading")
 </template>
 
 <script>

@@ -16,6 +16,10 @@ v-container#productmanage.pa-4
                     v-col(cols="12")
                       v-text-field(v-model="editedItem.name" label="商品名稱")
                       v-text-field(v-model="editedItem.discounttext" label="商品促銷活動")
+                      v-sheet.rounded-lg.imagecard(width="100%" v-show="image.length !== 0")
+                        v-img.rounded-lg(contain height="200" :src="image[0]")
+                        v-btn.btnclose(icon absolute top right @click="delimage")
+                          v-icon.white--text mdi-close
                       file-pond(
                         name="pond"
                         ref="pond"
@@ -82,7 +86,8 @@ export default {
         description: '',
         discounttext: '',
         sell: false
-      }
+      },
+      image: []
     }
   },
   components: {
@@ -97,6 +102,8 @@ export default {
     editItem (item) {
       this.editedIndex = this.products.indexOf(item)
       this.editedItem = Object.assign({}, item)
+      this.editedItem.image = []
+      this.image = this.products[this.editedIndex].image
       this.dialog = true
     },
     close () {
@@ -188,6 +195,22 @@ export default {
     },
     handleFilePondUpdateFile (files) {
       this.editedItem.image = files.map(files => files.file)
+    },
+    async delimage () {
+      try {
+        await this.axios.patch('/products/delimage/' + this.products[this.editedIndex]._id, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.state.jwt.token
+          }
+        })
+        this.image = []
+      } catch (error) {
+        this.$swal({
+          icon: 'error',
+          title: '錯誤',
+          text: '刪除商品圖片錯誤'
+        })
+      }
     }
   },
   async mounted () {

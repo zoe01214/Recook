@@ -64,7 +64,7 @@ v-container(fluid)#recipes.pa-0.px-lg-12.mb-12
   v-row.mx-1.mx-lg-8
     v-col(cols="12" lg="3" md="4" sm="6" v-for="(recipe,index) in showrecipes" :key="recipe._id")
       RecipeCard(:recipe="recipe" :nowuser="nowuser" @sendlike="likes(index)" @sendfav="favorites(index)")
-  loading(:active.sync="isLoading")
+  loading(:height="45" :width="45" :active.sync="isLoading")
 </template>
 
 <script>

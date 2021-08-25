@@ -34,17 +34,23 @@ v-container#eecipemanage.pa-4
                     h4.mb-1 上傳圖片
                     //- 單圖檔上傳
                     //- img-inputer(v-model="form.image" theme="dark" size="large" placeholder="點擊或拖曳選擇圖片" bottom-text="點擊或拖曳以修改")
-                    file-pond(
-                    name="pond"
-                    ref="pond"
-                    allow-multiple="true"
-                    max-files="5"
-                    accepted-file-types="image/jpeg, image/png"
-                    label-idle="點擊或拖曳選擇圖片"
-                    v-bind:files="form.image"
-                    allow-reorder="true"
-                    @updatefiles="handleFilePondUpdateFile"
-                    @reorderfiles="handleFilePondReoder")
+                  template
+                    draggable(v-model="image" @start="dragging = true" @end="dragging = false")
+                      v-sheet.bg-white-2.imagecard(width="25%" v-for="(item,index) of image" :key="item")
+                        v-img.rounded(height="200" :src="item")
+                        v-btn.btnclose(icon @click="delimage(index)" absolute top right)
+                          v-icon.white--text.text-subtitle-2 mdi-close
+                  v-divider.my-3
+                  file-pond(
+                  name="pond"
+                  ref="pond"
+                  allow-multiple="true"
+                  max-files="5"
+                  accepted-file-types="image/jpeg, image/png"
+                  label-idle="點擊或拖曳選擇圖片"
+                  v-bind:files="form.image"
+                  allow-reorder="true"
+                  @updatefiles="handleFilePondUpdateFile")
                   div(v-if="form.type === 'video'")
                     h4.mb-1 上傳影片 YOUTUBE 連結
                     v-text-field(outlined required :rules="ValidYouTubeLink(form.video)" v-model="form.video" placeholder="YOUTUBE 影片連結，例如：https://www.youtube.com/watch?v=E3kREFb3vHg")
@@ -187,7 +193,8 @@ export default ({
       newPortion: '',
       steps: [],
       newStep: '',
-      classify: ['烘焙甜點', '家常菜色', '電鍋料理', '蔬食料理', '異國料理', '快速上桌', '飲料冰品', '節慶料理', '寶寶兒童', '寵物料理']
+      classify: ['烘焙甜點', '家常菜色', '電鍋料理', '蔬食料理', '異國料理', '快速上桌', '飲料冰品', '節慶料理', '寶寶兒童', '寵物料理'],
+      image: []
     }
   },
   computed: {
@@ -227,12 +234,13 @@ export default ({
         video: this.recipes[this.editedIndex].video,
         servings: this.recipes[this.editedIndex].servings,
         time: this.recipes[this.editedIndex].time,
-        image: this.recipes[this.editedIndex].image,
+        image: [],
         _id: this.recipes[this.editedIndex]._id,
         ingredients: [],
         instructions: [],
         classify: this.recipes[this.editedIndex].classify
       }
+      this.image = this.recipes[this.editedIndex].image
       this.needs = []
       this.steps = []
       for (const i of this.recipes[this.editedIndex].ingredients) {
@@ -268,6 +276,7 @@ export default ({
         _id: '',
         classify: ''
       }
+      this.image = []
       this.needs = []
       this.steps = []
       this.editedIndex = -1
@@ -378,8 +387,18 @@ export default ({
             title: '錯誤',
             text: '請輸入食材項目與料理步驟'
           })
-        } else if (this.form.image.length !== 0) {
+        } if (this.image.length === 0 && this.form.image.length === 0) {
+          this.$swal({
+            icon: 'error',
+            title: '錯誤',
+            text: '請至少上傳一張照片'
+          })
+        } else {
           try {
+            this.form.orgimage = []
+            if (this.image.length !== 0) {
+              this.form.orgimage = this.image
+            }
             for (const s of this.steps) {
               this.form.instructions.push(s.steptext.toString())
             }
@@ -391,9 +410,13 @@ export default ({
             }
             const fd = new FormData()
             for (const key in this.form) {
-              if (Array.isArray(this.form[key]) && key !== 'image') {
+              if (Array.isArray(this.form[key]) && key !== 'image' && key !== 'orgimage') {
                 fd.append(key, JSON.stringify(this.form[key]))
               } else if (Array.isArray(this.form[key]) && key === 'image') {
+                for (const i in this.form[key]) {
+                  fd.append(key, this.form[key][i])
+                }
+              } else if (Array.isArray(this.form[key]) && key === 'orgimage') {
                 for (const i in this.form[key]) {
                   fd.append(key, this.form[key][i])
                 }
@@ -401,55 +424,17 @@ export default ({
                 fd.append(key, this.form[key])
               }
             }
-            if (this.editedIndex === -1) {
-              // 新增食譜
-              await this.axios.post('/recipes', fd, {
-                headers: {
-                  authorization: 'Bearer ' + this.$store.state.jwt.token
-                }
-              })
-              this.$swal({
-                icon: 'success',
-                title: '成功',
-                text: '食譜發布成功'
-              })
-              this.dialog = false
-            } else {
-              await this.axios.patch('/recipes/' + this.form._id, fd, {
-                headers: {
-                  authorization: 'Bearer ' + this.$store.state.jwt.token
-                }
-              })
-              this.$swal({
-                icon: 'success',
-                title: '成功',
-                text: '食譜修改成功'
-              })
-            }
-            const { data } = await this.axios.get('/recipes/')
-            this.recipes = data.result.map(recipe => {
-              if (recipe.image) {
-                recipe.image = recipe.image.map(r => `${process.env.VUE_APP_API}/files/${r}`)
+            await this.axios.patch('/recipes/' + this.form._id, fd, {
+              headers: {
+                authorization: 'Bearer ' + this.$store.state.jwt.token
               }
-              return recipe
             })
-            this.dialog = false
-            this.form = {
-              name: '',
-              type: 'text',
-              image: [],
-              description: '',
-              video: '',
-              servings: '',
-              time: '',
-              ingredients: [],
-              instructions: [],
-              _id: '',
-              classify: ''
-            }
-            this.needs = []
-            this.steps = []
-            this.page = 1
+            this.$swal({
+              icon: 'success',
+              title: '成功',
+              text: '食譜修改成功'
+            })
+            this.$router.push('/recipes/')
           } catch (error) {
             this.form.ingredients = []
             this.form.instructions = []
@@ -459,12 +444,6 @@ export default ({
               text: error.response.data.message
             })
           }
-        } else {
-          this.$swal({
-            icon: 'error',
-            title: '錯誤',
-            text: '請至少上傳一張食譜照片'
-          })
         }
       }
     },
@@ -535,6 +514,22 @@ export default ({
     },
     handleFilePondReoder (files) {
       this.form.image = files.map(files => files.file)
+    },
+    async delimage (index) {
+      try {
+        await this.axios.patch('/recipes/delimage/' + this.form._id, { index: index }, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.state.jwt.token
+          }
+        })
+        this.image.splice(index, 1)
+      } catch (error) {
+        this.$swal({
+          icon: 'error',
+          title: '錯誤',
+          text: '刪除圖片失敗'
+        })
+      }
     }
   },
   async mounted () {

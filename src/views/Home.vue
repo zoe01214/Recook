@@ -105,7 +105,7 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
         span.black--text.mr-3.font-weight-bold 前往了解
         v-icon.iconcircle mdi-chevron-right
   v-divider.py-6
-  loading(:active.sync="isLoading")
+  loading(:height="45" :width="45" :active.sync="isLoading")
 </template>
 
 <script>
@@ -220,41 +220,44 @@ export default {
     try {
       const vm = this
       vm.isLoading = true
-      const { data } = await this.axios.get('/recipes/home')
-      const popular = await this.axios.get('/users/home')
-      const product = await this.axios.get('/products/home')
-      const post = await this.axios.get('/posts/home')
-      this.recipes = data.result.map(recipe => {
-        if (recipe.image) {
-          recipe.image = recipe.image.map(r => `${process.env.VUE_APP_API}/files/${r}`)
-        }
-        recipe.favorite = false
-        recipe.like = false
-        if (recipe.author.avatar) {
-          recipe.author.avatar = recipe.author.avatar.map(i => `${process.env.VUE_APP_API}/files/${i}`)
-        }
-        return recipe
-      })
-      this.recipes = this.recipes.filter(r => r.isEnabled !== 0)
-      this.users = popular.data.result.map(u => {
-        if (u.avatar !== undefined && u.avatar.length !== 0) {
-          u.avatar = u.avatar.map(r => `${process.env.VUE_APP_API}/files/${r}`)
-        }
-        return u
-      })
-      console.log(this.users)
-      this.products = product.data.result.map(p => {
-        if (p.image) {
+      const loading = async () => {
+        const { data } = await this.axios.get('/recipes/home')
+        const popular = await this.axios.get('/users/home')
+        const product = await this.axios.get('/products/home')
+        const post = await this.axios.get('/posts/home')
+        this.recipes = data.result.map(recipe => {
+          if (recipe.image) {
+            recipe.image = recipe.image.map(r => `${process.env.VUE_APP_API}/files/${r}`)
+          }
+          recipe.favorite = false
+          recipe.like = false
+          if (recipe.author.avatar) {
+            recipe.author.avatar = recipe.author.avatar.map(i => `${process.env.VUE_APP_API}/files/${i}`)
+          }
+          return recipe
+        })
+        this.recipes = this.recipes.filter(r => r.isEnabled !== 0)
+        this.users = popular.data.result.map(u => {
+          if (u.avatar !== undefined && u.avatar.length !== 0) {
+            u.avatar = u.avatar.map(r => `${process.env.VUE_APP_API}/files/${r}`)
+          }
+          return u
+        })
+        this.products = product.data.result.map(p => {
+          if (p.image) {
+            p.image = p.image.map(r => `${process.env.VUE_APP_API}/files/${r}`)
+          }
+          return p
+        })
+        this.posts = post.data.result.map(p => {
           p.image = p.image.map(r => `${process.env.VUE_APP_API}/files/${r}`)
-        }
-        return p
+          return p
+        })
+      }
+      loading().then(result => {
+        console.log(result)
+        vm.isLoading = false
       })
-      this.posts = post.data.result.map(p => {
-        p.image = p.image.map(r => `${process.env.VUE_APP_API}/files/${r}`)
-        return p
-      })
-      vm.isLoading = false
-      console.log(vm.isLoading)
       if (this.user.islogin) {
         const user = await this.axios.get('/users/' + this.$store.state.user._id)
         this.nowuser = {

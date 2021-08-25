@@ -175,6 +175,7 @@ v-container(fluid)#recipeinfo.pa-0.px-lg-12.mb-12
       div.text-right
         v-btn.black(outlined @click="submitmsg")
           span.white--text 發佈
+  loading(:height="45" :width="45" :active.sync="isLoading")
 </template>
 
 <script>
@@ -218,7 +219,9 @@ export default {
       reportdialog: false,
       newreason: '',
       editdialog: false,
-      fab: false
+      fab: false,
+      isLoading: false,
+      fullPage: true
     }
   },
   computed: {
@@ -464,6 +467,8 @@ export default {
   },
   async mounted () {
     try {
+      const vm = this
+      vm.isLoading = true
       this.animation()
       const { data } = await this.axios.get('/recipes/' + this.$route.params.id)
       const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
@@ -515,6 +520,7 @@ export default {
           this.nowuser.favorite = false
         }
       }
+      vm.isLoading = false
     } catch (error) {
       this.$swal({
         icon: 'error',
