@@ -64,31 +64,6 @@
   .theme--light.v-icon:focus::after {
     opacity: 0.25;
 }
-  .searchbar{
-    width: 150px;
-    height: 34px;
-    background: rgb(245, 245, 245);
-    
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: rgba(136, 127, 127, 0.774);
-      opacity: 1; /* Firefox */
-    }
-    
-    :-ms-input-placeholder { /* Internet Explorer 10-11 */
-      color: rgba(136, 127, 127, 0.774);
-    }
-    
-    ::-ms-input-placeholder { /* Microsoft Edge */
-      color: rgba(136, 127, 127, 0.774);
-    }
-    
-    input{
-      color: rgba(136, 127, 127, 0.774);
-      width: 65%;
-      outline: 0;
-    }
-    
-  }
   
   .appmenu{
     z-index: 3;
@@ -106,6 +81,18 @@
     }
     .v-icon::after {
       background-color: orange;
+    }
+  }
+  
+  .topmenu{
+    z-index: 3;
+    position: fixed;
+    top:0px;
+    left:0;
+    width: 100%;
+    height:60px;
+    .w-100{
+      width: 100%;
     }
   }
   

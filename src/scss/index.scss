@@ -22,10 +22,6 @@ body{
   font-family: 'Noto Sans TC', sans-serif;
 }
 
-  
-[v-cloak] {
-  display: none !important;
-}
 
 // recipes-filter 食譜分類中使用
 input[type=checkbox] {
@@ -84,12 +80,6 @@ div[role=menu] {
   background-color: #e0b07d;
 }
 
-// .orangebtn-border{
-//   border: 1px solid #DEA56A;
-//   background: white !important;
-// }
-
-
 #app{
   // register, login 頁面共用 btn
   .loginbtn{
@@ -105,9 +95,6 @@ div[role=menu] {
     letter-spacing: 12px;
   }
 }
-
-
-$mainBlue: #292A40;
 
 
 a:-webkit-any-link {

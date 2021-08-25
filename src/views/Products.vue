@@ -15,8 +15,8 @@ v-container(fluid)#products.pa-0.px-lg-12.mb-12
               div.mb-2.name.single-line {{item.name}}
               div.mb-5.text-subtitle-1.shcut {{item.shortcut}}
               v-sheet.btnborder.d-flex.align-center.text-center.bgtrans
-                div.pa-2.pricetext NT.{{item.price}}
-                button(@click.prevent="addcart(item._id)").pa-2.bagtext 放進購物車
+                div(:style="greyoutline(item.quantity)").pa-2.pricetext NT.{{item.price}}
+                button(@click.prevent="addcart(item._id)" :style="outofstock(item.quantity)").pa-2.bagtext {{outofstocktext(item.quantity)}}
 </template>
 
 <script>
@@ -61,6 +61,15 @@ export default ({
       } else {
         this.$router.push('/login')
       }
+    },
+    greyoutline (qt) {
+      return qt === 0 ? 'border-color: #c9c5c1;' : ''
+    },
+    outofstock (qt) {
+      return qt === 0 ? 'border-color: #c9c5c1;background-color:#c9c5c1;' : ''
+    },
+    outofstocktext (qt) {
+      return qt === 0 ? '商品已售完' : '放進購物車'
     }
   },
   async mounted () {

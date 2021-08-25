@@ -1,5 +1,5 @@
 <template lang="pug">
-v-container(fluid)#posts.pa-0.px-lg-12
+v-container(fluid)#posts.pa-0.px-lg-12.mb-12
   v-sheet.mx-3.px-lg-12.d-flex.align-center.mb-12
     h2.header-title.mr-6 料理生活
     v-divider

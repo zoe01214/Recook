@@ -1,6 +1,6 @@
 <template lang="pug">
 v-container(fluid)#userpage.pa-0.px-lg-12.mb-12
-  v-sheet.mx-10.rounded-xl
+  v-sheet.mx-3.mx-lg-10.rounded-xl
     v-row.d-flex.align-start
       v-col(cols="12" lg="8")
         div.d-flex.align-center
@@ -85,7 +85,7 @@ v-container(fluid)#userpage.pa-0.px-lg-12.mb-12
                 v-row.text-center
                   v-col(cols="4")
                     p {{author.recipes.length}}
-                    div 貼文
+                    div 食譜
                   v-divider(vertical)
                   v-col(cols="4")
                     p {{author.follower.length}}
@@ -115,12 +115,12 @@ v-container(fluid)#userpage.pa-0.px-lg-12.mb-12
         v-divider
       v-col(cols="12" v-if="recipetab === 'recipe'")
         v-row
-          v-col(cols="12" md="4" lg="3" v-for="(recipe,index) in author.recipes" :key="recipe._id")
+          v-col(cols="6" md="4" lg="3" v-for="(recipe,index) in author.recipes" :key="recipe._id")
             router-link(:to="'/recipe/'+recipe._id")
               UserRecipe(:recipe="recipe" :nowuser="nowuser" v-show="recipe.isEnabled !== 0" @sendlike="like (index)" @sendfav="favorite (index)")
       v-col(cols="12" v-else)
         v-row
-          v-col(cols="12" md="4" lg="3" v-for="(recipe,index) in author.favorites" :key="recipe._id")
+          v-col(cols="6" md="4" lg="3" v-for="(recipe,index) in author.favorites" :key="recipe._id")
             router-link(:to="'/recipe/'+recipe._id")
               UserRecipe(:recipe="recipe" :nowuser="nowuser" v-show="recipe.isEnabled !== 0" @sendlike="like (index)" @sendfav="favorite (index)")
 </template>

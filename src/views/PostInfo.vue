@@ -13,9 +13,6 @@ v-container(fluid)#postinfo.pa-0.px-lg-12.mb-12
         p.pt-3.px-lg-4.content(v-html="post.content")
     v-container.px-lg-12
       div.text-right.date 發佈時間: {{post.date}}
-  v-container.px-lg-12(v-cloak v-else)
-    v-sheet.bg-white-2.text-center.pa-6.rounded-xl
-      v-alert(type="error") 這則貼文已經下架囉！
 </template>
 
 <script>

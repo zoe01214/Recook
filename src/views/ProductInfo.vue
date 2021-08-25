@@ -1,9 +1,9 @@
 <template lang="pug">
-v-container(fluid)#productinfo.pa-0.px-lg-12
+v-container(fluid)#productinfo.pa-0.px-lg-12.mb-12
   v-sheet.mx-3.px-lg-12.d-flex.align-center.mb-12
     h2.header-title.mr-6 主廚市集
     v-divider
-  v-sheet.mx-3.mx-lg-10.pa-8.rounded-xl.bg-white-2.mt-12(v-if="product.sell")
+  v-sheet.mx-3.mx-lg-10.pa-8.rounded-xl.bg-white-2.mt-12
     v-row.pa-6.px-lg-12
       v-col(cols="12" md="5")
         v-sheet.bgtrans.px-lg-12.d-flex.justify-center
@@ -21,11 +21,8 @@ v-container(fluid)#productinfo.pa-0.px-lg-12
               InputNumber.numtext(v-model.number="amount" :rules="state.amount")
             v-col(cols="12" lg="6")
               v-sheet.btnborder.d-flex.align-center.text-center.bgtrans
-                div.pa-2.pricetext NT.{{product.price}}
-                button(@click="addcart").pa-2.bagtext 放進購物車
-  v-container(v-cloak v-else)
-    v-sheet.mx-10.rounded-xl.bg-white-2
-       v-alert(type="error") 這項商品已經下架囉！
+                div(:style="greyoutline(product.quantity)").pa-2.pricetext NT.{{product.price}}
+                button(@click="addcart" :style="outofstock(product.quantity)").pa-2.bagtext {{outofstocktext(product.quantity)}}
 </template>
 
 <script>
@@ -64,24 +61,39 @@ export default {
         if (this.$store.state.jwt.token.length === 0) {
           this.$router.push('/login')
         }
-
         try {
-          await this.axios.post('/users/cart', { product: this.$route.params.id, amount: this.amount }, {
-            headers: {
-              authorization: 'Bearer ' + this.$store.state.jwt.token
+          if (this.product.sell) {
+            if (this.amount <= this.quantity) {
+              await this.axios.post('/users/cart', { product: this.$route.params.id, amount: this.amount }, {
+                headers: {
+                  authorization: 'Bearer ' + this.$store.state.jwt.token
+                }
+              })
+              this.$swal({
+                icon: 'success',
+                title: '成功',
+                text: '成功購物車'
+              })
+              const newdata = await this.axios.get('/users/cart', {
+                headers: {
+                  authorization: 'Bearer ' + this.$store.state.jwt.token
+                }
+              })
+              this.$store.commit('changecart', newdata.data.result)
+            } else {
+              this.$swal({
+                icon: 'error',
+                title: '錯誤',
+                text: '訂購數量超過庫存上限'
+              })
             }
-          })
-          this.$swal({
-            icon: 'success',
-            title: '成功',
-            text: '成功購物車'
-          })
-          const newdata = await this.axios.get('/users/cart', {
-            headers: {
-              authorization: 'Bearer ' + this.$store.state.jwt.token
-            }
-          })
-          this.$store.commit('changecart', newdata.data.result)
+          } else {
+            this.$swal({
+              icon: 'error',
+              title: '錯誤',
+              text: '這項商品已下架'
+            })
+          }
         } catch (error) {
           this.$swal({
             icon: 'error',
@@ -91,6 +103,33 @@ export default {
         }
       } else {
         this.$router.push('/login')
+      }
+    },
+    greyoutline (qt) {
+      if (!this.product.sell) {
+        return 'border-color: #c9c5c1;'
+      } else if (qt === 0) {
+        return 'border-color: #c9c5c1;'
+      } else {
+        return ''
+      }
+    },
+    outofstock (qt) {
+      if (!this.product.sell) {
+        return 'border-color: #c9c5c1;background-color: #c9c5c1;'
+      } else if (qt === 0) {
+        return 'border-color: #c9c5c1;background-color: #c9c5c1;'
+      } else {
+        return ''
+      }
+    },
+    outofstocktext (qt) {
+      if (!this.product.sell) {
+        return '商品已下架'
+      } else if (qt === 0) {
+        return '商品已售完'
+      } else {
+        return '放進購物車'
       }
     }
   },

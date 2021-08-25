@@ -27,8 +27,6 @@ v-container(fluid)#recipeinfo.pa-0.px-lg-12.mb-12
                     v-icon.white--text {{ favicon }}
           div.text-right.text-caption.grey--text Published: {{ recipe.publish_date }}
       v-col(cols="12" lg="8").order-md-1.leftsection
-        div.px-6.px-lg-0.pr-lg-6(v-cloak v-if="recipe.isEnabled !== 1")
-          v-alert(type="error") 該筆食譜已下架，不會出現在搜尋當中。
         v-sheet.px-6.px-lg-0.pr-lg-6
           div
             v-sheet.d-flex.align-center
@@ -152,7 +150,7 @@ v-container(fluid)#recipeinfo.pa-0.px-lg-12.mb-12
           v-card(flat).my-8
             v-btn.orangebtn(text block @click="msgdialog = !msgdialog")
               span.font-h4.spacing 新增留言
-  v-speed-dial(
+  v-speed-dial.d-none.d-lg-flex(
     v-model="fab"
     direction="left"
     :transition="author.transition")
@@ -452,17 +450,15 @@ export default {
       }
     },
     animation () {
-      gsap.to('.imgfixed', {
+      gsap.from('.imgfixed', {
         scrollTrigger: {
-          trigger: '#recipeinfo',
+          trigger: '.imgfixed',
           start: 'top top',
-          end: 'bottom bottom',
-          scrub: true
+          end: 'top top',
+          scrub: true,
+          markers: true
         },
-        position: 'fixed',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        'z-index': 1,
+        position: 'relative',
         'max-width': '380px'
       })
     }

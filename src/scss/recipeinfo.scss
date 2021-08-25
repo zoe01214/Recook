@@ -8,6 +8,14 @@
       max-height: 32vh;
     }
   }
+  .imgfixed{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    max-width: 380px;
+  }
+  
   .botnav{
     position:fixed;
     width:90%;
