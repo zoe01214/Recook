@@ -7,6 +7,8 @@ import vuetify from './plugins/vuetify'
 import './scss/index.scss'
 import './plugins/axios.js'
 import { gsap, ScrollTrigger, Draggable, MotionPathPlugin } from 'gsap/all'
+import VueSplide from '@splidejs/vue-splide'
+import '@splidejs/splide/dist/css/themes/splide-default.min.css'
 
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
@@ -53,6 +55,7 @@ Vue.component('FilePond', vueFilePond(
 Vue.component('ImgInputer', ImgInputer)
 Vue.component('avatar', Avatar)
 Vue.use(VueEditor)
+Vue.use(VueSplide)
 
 Vue.config.productionTip = false
 

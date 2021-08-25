@@ -1,0 +1,72 @@
+#home{
+  .imgchip{
+    position: absolute;
+    left:50%;
+    bottom:10%;
+    transform: translateX(-50%);
+  }
+  .iconcircle{
+    width:36px;
+    height:36px;
+    background: rgb(240, 240, 240);
+    border-radius: 50%;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .bg-white-2{
+    background: rgb(249, 247, 245);
+  }
+  .circle{
+    border-radius: 50% !important; 
+   }
+   .name{
+    font-size: 20px;
+    font-weight: 900;
+  }
+  .shcut {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; //行數
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    font-size: 15px !important;
+    line-height: 1.4rem;
+    color: #333;
+  }
+  .fluidimg{
+    width: 100%;
+    height: 50%;
+    background: red;
+    padding:10px;
+  }
+  .tag{
+    background-color: rgb(251, 220, 197);
+    font-weight: 600;
+    letter-spacing: 6px;
+  }
+  
+  .ptitle{
+    display: -webkit-box;
+    -webkit-line-clamp: 2; //行數
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow:hidden;
+  }
+  
+  .content{
+    display: -webkit-box;
+    -webkit-line-clamp: 5; //行數
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow:hidden;
+  }
+  .underline{
+    font-size: 1.2rem;
+    letter-spacing: 0.5rem;
+    border-bottom: 1px solid black;
+    color:black;
+    transition: 0.3s ease;
+  }
+  .underline:hover{
+    border-bottom: 1px solid rgb(141, 141, 141);
+    color:rgb(141, 141, 141);
+  }
+}

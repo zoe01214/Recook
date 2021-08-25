@@ -1,9 +1,9 @@
 <template lang="pug">
-v-container(fluid)#recipeinfo.px-lg-12
-  v-sheet(v-show="recipe.isEnabled === 1")
+v-container(fluid)#recipeinfo.pa-0.px-lg-12.mb-12
+  v-sheet.mx-3.mx-lg-10.rounded-xl.mt-3.mb-12
     v-row.trigger
-      v-col(cols="12" lg="4").order-lg-2.d-none.d-lg-flex
-        v-sheet(max-width="380px").px-6.px-lg-0.imgfixed
+      v-col(cols="12" lg="4").order-lg-2.d-none.d-lg-flex.justify-end
+        v-sheet(width="380px").imgfixed
           v-carousel.rounded-lg.mb-3(hide-delimiter-background show-arrows-on-hover max)
             v-carousel-item(
               v-if="recipe.video"
@@ -27,6 +27,8 @@ v-container(fluid)#recipeinfo.px-lg-12
                     v-icon.white--text {{ favicon }}
           div.text-right.text-caption.grey--text Published: {{ recipe.publish_date }}
       v-col(cols="12" lg="8").order-md-1.leftsection
+        div.px-6.px-lg-0.pr-lg-6(v-cloak v-if="recipe.isEnabled !== 1")
+          v-alert(type="error") 該筆食譜已下架，不會出現在搜尋當中。
         v-sheet.px-6.px-lg-0.pr-lg-6
           div
             v-sheet.d-flex.align-center
@@ -40,14 +42,14 @@ v-container(fluid)#recipeinfo.px-lg-12
               v-spacer
               v-menu(offset-y v-if="user._id === author._id")
                 template(v-slot:activator="{ on, attrs }")
-                  v-btn(small depressed outlined color="grey" v-bind="attrs" v-on="on" )
-                    span 編輯食譜
+                  v-btn(outlined color="#DEA56A" v-bind="attrs" v-on="on" )
+                    span.font-h5 編輯食譜
                     v-icon(x-small) mdi-chevron-down
                 v-list(dense)
-                  v-list-item(:to="'/recipe/edit/' + recipe._id")
-                    div.subtitle-2 修改
-                  v-list-item(@click="delRecipeById")
-                    div.subtitle-2.red--text 刪除
+                  v-list-item(:to="'/recipe/edit/' + recipe._id").d-flex.justify-center
+                    div.subtitle-1 修改
+                  v-list-item(@click="delRecipeById").d-flex.justify-center
+                    div.subtitle-1.red--text 刪除
               div.d-flex.align-center
                 v-btn.orangebtn(depressed @click="follow" v-if="!nowuser.follow && (user._id !== author._id)")
                   span.font-h5.white--text 追蹤
@@ -175,12 +177,6 @@ v-container(fluid)#recipeinfo.px-lg-12
       div.text-right
         v-btn.black(outlined @click="submitmsg")
           span.white--text 發佈
-  div(v-show="recipe.isEnabled === 0")
-    v-alert(
-      dense
-      border="left"
-      type="warning")
-        span 查詢的食譜已下架
 </template>
 
 <script>
@@ -466,7 +462,8 @@ export default {
         position: 'fixed',
         top: '50%',
         transform: 'translateY(-50%)',
-        'z-index': 1
+        'z-index': 1,
+        'max-width': '380px'
       })
     }
   },

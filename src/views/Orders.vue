@@ -1,29 +1,25 @@
 <template lang="pug">
-v-container#orders(fluid).pa-0.mb-12
-  v-container.mb-4
-    v-row
-      v-col(cols="12")
-        v-sheet.px-12.d-flex.align-center
-          h2.header-title.mr-6 我的訂單
+v-container#orders(fluid).pa-0.px-lg-12.mb-12
+  v-sheet.mx-3.px-lg-12.d-flex.align-center.mb-12
+    h2.header-title.mr-6 我的訂單
+    v-divider
+  v-sheet.mx-3.mx-lg-10.pa-8.rounded-xl.bg-white-2.mt-12
+    v-row.py-5
+      v-col(cols="12" v-for="(item,index) in orders" :key="item._id")
+        div.pa-10
+          p.font-h4 訂單編號: {{item._id}}
           v-divider
-  v-container
-    v-sheet.mx-10.rounded-xl.bg-white-2.pa-6
-      v-row.py-5
-        v-col(cols="12" v-for="(item,index) in orders" :key="item._id")
-          div.pa-10
-            p.font-h4 訂單編號: {{item._id}}
-            v-divider
-            table.ordertable
-              tr
-                th.pl-5 日期
-                th 訂單明細
-                th 總金額
-                th 狀態
-              tr
-                td.pl-5 {{item.date}}
-                td {{item.detail}}
-                td NT.{{item.total}}
-                td {{item.state}}
+          table.ordertable
+            tr
+              th.pl-5 日期
+              th 訂單明細
+              th 總金額
+              th 狀態
+            tr
+              td.pl-5 {{item.date}}
+              td {{item.detail}}
+              td NT.{{item.total}}
+              td {{item.state}}
 </template>
 
 <script>

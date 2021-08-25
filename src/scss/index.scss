@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400;500;600;700;900&display=swap');
 @import './app.scss';
+@import './home.scss';
 @import './recipes.scss';
 @import './recipecard.scss';
 @import './products.scss';
@@ -14,10 +15,16 @@
 @import './checkout.scss';
 @import './userpage.scss';
 @import './questions.scss';
+@import './variables.scss';
 
 body{
   overflow-y: hidden !important;
   font-family: 'Noto Sans TC', sans-serif;
+}
+
+  
+[v-cloak] {
+  display: none !important;
 }
 
 // recipes-filter 食譜分類中使用
@@ -61,14 +68,26 @@ div[role=menu] {
   background: #DEA56A !important;
   color: white !important;
 }
+.orangebtn-border{
+  border: 1px solid #DEA56A;
+  background: white !important;
+  color: #DEA56A !important;
+}
+
+.greybtn-border{
+  border: 1px solid #c0c0c0;
+  background: white !important;
+  color: #c0c0c0 !important;
+}
 
 .orangebtn:hover{
   background-color: #e0b07d;
 }
-.orangebtn-border{
-  border: 1px solid #DEA56A;
-  background: white !important;
-}
+
+// .orangebtn-border{
+//   border: 1px solid #DEA56A;
+//   background: white !important;
+// }
 
 
 #app{

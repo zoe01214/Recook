@@ -1,39 +1,35 @@
 <template lang="pug">
-v-container#cart(fluid).pa-0.mb-12
-  v-container.mb-4
-    v-row
-      v-col(cols="12")
-        v-sheet.px-12.d-flex.align-center
-          h2.header-title 購物車
-          span.text-h6.ml-3.mr-6 {{cart.length}} 項商品
-          v-divider
-  v-container
-    v-sheet.mx-10.rounded-xl.bg-white-2.pa-12
-      v-card.trans.pa-6(flat v-for="(item,index) of cart" :key="item._id")
-        v-row.d-flex-.align-center
-          v-col(cols="12" md="4")
-            router-link(:to="'/products/' + item._id")
-              v-img.circle.mx-auto(contain max-width="150px" min-width="100px" :src="item.image")
-          v-col(cols="12" md="4")
-            p.font-h2.single-line {{item.name}}
-            div.font-h3.mainorange.single-line 單價 NT.{{item.price}}
-          v-col(cols="12" md="2")
-            InputNumber.numtext(v-model="item.amountModel" @input="amountchange(index)")
-          v-col(cols="12" md="2")
-            v-btn(icon absolute top right @click="delProduct(index)")
-              v-icon mdi-close
-            div.d-flex.align-center
-              v-card-title.single-line NT.{{item.price * item.amountModel}}
-        v-divider.mt-6
-      v-card(flat).pa-6.trans.d-flex.flex-column
-        v-row
-          v-col(cols="8")
-          v-col(cols="12" md="4")
-            div.ml-auto.text-right
-              p.font-h3 訂單總計 NT.{{totalprice}}
-              p 共 {{totalamount}} 件商品
-              v-btn.orangebtn.ml-auto.px-12(block text @click="checkout" :disabled="cart.length === 0")
-                span.font-h3.white--text 結帳
+v-container#cart(fluid).pa-0.px-lg-12.mb-12
+  v-sheet.mx-3.px-lg-12.d-flex.align-center.mb-12
+    h2.header-title 購物車
+    span.text-h6.ml-3.mr-6 {{cart.length}} 項商品
+    v-divider
+  v-sheet.mx-3.mx-lg-10.pa-8.rounded-xl.bg-white-2.mt-12
+    v-card.trans.pa-6(flat v-for="(item,index) of cart" :key="item._id")
+      v-row.d-flex-.align-center
+        v-col(cols="12" md="4")
+          router-link(:to="'/products/' + item._id")
+            v-img.circle.mx-auto(contain max-width="150px" min-width="100px" :src="item.image")
+        v-col(cols="12" md="4")
+          p.font-h2.single-line {{item.name}}
+          div.font-h3.mainorange.single-line 單價 NT.{{item.price}}
+        v-col(cols="12" md="2")
+          InputNumber.numtext(v-model="item.amountModel" @input="amountchange(index)")
+        v-col(cols="12" md="2")
+          v-btn(icon absolute top right @click="delProduct(index)")
+            v-icon mdi-close
+          div.d-flex.align-center
+            v-card-title.single-line NT.{{item.price * item.amountModel}}
+      v-divider.mt-6
+    v-card(flat).pa-6.trans.d-flex.flex-column
+      v-row
+        v-col(cols="8")
+        v-col(cols="12" md="4")
+          div.ml-auto.text-right
+            p.font-h3 訂單總計 NT.{{totalprice}}
+            p 共 {{totalamount}} 件商品
+            v-btn.orangebtn.ml-auto.px-12(block text @click="checkout" :disabled="cart.length === 0")
+              span.font-h3.white--text 結帳
 </template>
 
 <script>

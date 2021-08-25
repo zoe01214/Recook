@@ -1,129 +1,128 @@
 <template lang="pug">
-v-container#userpage.pa-0.mb-12
-  v-container
-    v-sheet.mx-10.rounded-xl
-      v-row.d-flex.align-start
-        v-col(cols="12" lg="8")
-          div.d-flex.align-center
-            v-sheet.d-flex.align-center
-              v-avatar.d-flex.mr-3(v-if="author.avatar" :size="avatar.size")
-                img(:src="author.avatar")
-              avatar.d-flex.mr-3(v-else :size="avatar.size" :name="author.account" :variant="avatar.variant" :colors="avatar.colors")
-              div
-                h3.single-line.mb-2 {{author.username}}
-                div.single-line.text-subtitle-1.grey--text.font-weight-light.mt-n2 {{author.total}} 道食譜 {{author.follower.length}} 位粉絲
-            v-spacer
-            div.d-flex
-              v-dialog(
-                v-if="user._id === author._id"
-                v-model="dialog"
-                persistent
-                max-width="520px")
-                template(v-slot:activator="{ on, attrs }")
-                  v-btn.orangebtn(text v-bind="attrs" v-on="on")
-                    span.font-h5.d-none.d-md-flex 編輯個人資料
-                    v-icon.font-h5.white--text.d-flex.d-md-none mdi-cog
-                v-card#userinfo.bg-white-2.rounded-xl.pa-3.py-5
-                  p.font-h2.text-center 編輯個人資料
-                  v-divider.my-3.mb-5
-                  v-form.px-3
-                    v-row.mx-auto
-                      v-col(cols="12")
-                        div.text-center(v-if="showpond")
-                          file-pond.mb-3(
-                            imageCropAspectRatio="1"
-                            imageResizeTargetWidth="250"
-                            stylePanelLayout='compact circle'
-                            styleLoadIndicatorPosition='center bottom'
-                            styleProgressIndicatorPosition='right bottom'
-                            styleButtonRemoveItemPosition='left bottom'
-                            styleButtonProcessItemPosition='right bottom'
-                            accepted-file-types="image/jpeg, image/png"
-                            label-idle="選擇圖片"
-                            @updatefiles="handleFilePondUpdateFile")
-                          v-btn(text @click="showpond = !showpond")
-                            span.font-h4 取消
-                        div.text-center(v-else)
-                          div.pointer.d-flex.justify-center.mb-3
-                            v-avatar(v-if="author.avatar" :size="100")
-                              img(:src="author.avatar")
-                            avatar(v-else :size="100" :name="author.account" :variant="avatar.variant" :colors="avatar.colors")
-                          v-btn(text @click="showpond = !showpond")
-                            v-icon.mr-3 mdi-pencil
-                            span.font-h4 更換大頭貼
-                      v-col(cols="12")
-                        v-row.mx-auto.mt-3
-                          v-col(cols="4")
-                            div.font-h4 帳號名稱
-                          v-col(cols="8")
-                            div {{author.account}}
-                          v-col(cols="4")
-                            div.font-h4 用戶名稱
-                          v-col(cols="8")
-                            v-text-field.pa-0.ma-0.mb-n6(v-model="form.newname" color="#DEA56A" dense) {{form.newname}}
-                          v-col(cols="4")
-                            div.font-h4 個人簡介
-                          v-col(cols="8")
-                            v-textarea.pa-0.ma-0(v-model="form.newprofile" color="#DEA56A" rows="3" dense placeholder="個人簡介") {{form.newprofile}}
-                      v-col(cols="12")
-                        div.text-right
-                          v-btn(text @click="cancelInfo") 取消
-                          v-btn(text color="#DEA56A" @click="submitInfo") 完成
-              v-btn.orangebtn(depressed @click="follow" v-show="nowuser.showfollow && (user._id !== author._id)")
-                span.font-h5.white--text 追蹤
-              v-btn(depressed outlined color="#DEA56A" @click="follow" v-show="!nowuser.showfollow && (user._id !== author._id)")
-                span.font-h5 追蹤中
-                v-icon(x-small) mdi-chevron-down
-          div.mt-5
-            p(style="white-space: pre-wrap;") {{ author.profile }}
-        v-col(cols="12" lg="4")
-          v-card.pa-6(flat)
+v-container(fluid)#userpage.pa-0.px-lg-12.mb-12
+  v-sheet.mx-10.rounded-xl
+    v-row.d-flex.align-start
+      v-col(cols="12" lg="8")
+        div.d-flex.align-center
+          v-sheet.d-flex.align-center
+            v-avatar.d-flex.mr-3(v-if="author.avatar" :size="avatar.size")
+              img(:src="author.avatar")
+            avatar.d-flex.mr-3(v-else :size="avatar.size" :name="author.account" :variant="avatar.variant" :colors="avatar.colors")
+            div
+              h3.single-line.mb-2 {{author.username}}
+              div.single-line.text-subtitle-1.grey--text.font-weight-light.mt-n2 {{author.total}} 道食譜 {{author.follower.length}} 位粉絲
+          v-spacer
+          div.d-flex
             v-dialog(
-              v-model="flwdialog"
-              max-width="500px")
+              v-if="user._id === author._id"
+              v-model="dialog"
+              persistent
+              max-width="520px")
               template(v-slot:activator="{ on, attrs }")
-                v-sheet.d-flex.align-center(v-bind="attrs" v-on="on")
-                  v-row.text-center
-                    v-col(cols="4")
-                      p {{author.recipes.length}}
-                      div 貼文
-                    v-divider(vertical)
-                    v-col(cols="4")
-                      p {{author.follower.length}}
-                      div 粉絲
-                    v-divider(vertical)
-                    v-col(cols="4")
-                      p {{author.following.length}}
-                      div 追蹤
-              v-card.rounded-xl.pa-6
-                v-sheet.text-center.rounded-xl
-                  p.font-h2.orangetext {{author.username}}
-                  v-tabs.mb-3(v-model="tab" background-color="transparent" color="#DEA56A" grow)
-                    v-tab(href="#follower") {{author.follower.length}} 粉絲
-                    v-tab(href="#following") {{author.following.length}} 追蹤名單
-                  v-tabs-items(v-model="tab")
-                    v-tab-item(:value="'follower'")
-                      v-card(flat).pa-2.px-5
-                        v-sheet(v-for="(item,index) of author.follower" :key="item._id").mb-2
-                          UserCard(:userdata="item" :avatar="avatar" :nowuser="nowuser" :action="'follower'" @sendfollow="userfollow($event, index)")
-                    v-tab-item(:value="'following'")
-                      v-card(flat).pa-2.px-5
-                        v-sheet(v-for="(item,index) of author.following" :key="item._id").mb-2
-                          UserCard(:userdata="item" :avatar="avatar" :nowuser="nowuser" :action="'following'" @sendfollow="userfollow($event, index)")
-        v-col(cols="12").d-flex.align-center
-          p.recipetab.mr-6(@click="refresh('recipe')" :class="rpclass('recipe')") 食譜
-          p.recipetab.mr-6(@click="refresh('favorite')" :class="rpclass('favorite')") 收藏
-          v-divider
-        v-col(cols="12" v-if="recipetab === 'recipe'")
-          v-row
-            v-col(cols="12" md="3" v-for="(recipe,index) in author.recipes" :key="recipe._id")
-              router-link(:to="'/recipe/'+recipe._id")
-                UserRecipe(:recipe="recipe" :nowuser="nowuser" v-show="recipe.isEnabled !== 0" @sendlike="like (index)" @sendfav="favorite (index)")
-        v-col(cols="12" v-else)
-          v-row
-            v-col(cols="12" md="3" v-for="(recipe,index) in author.favorites" :key="recipe._id")
-              router-link(:to="'/recipe/'+recipe._id")
-                UserRecipe(:recipe="recipe" :nowuser="nowuser" v-show="recipe.isEnabled !== 0" @sendlike="like (index)" @sendfav="favorite (index)")
+                v-btn.orangebtn(text v-bind="attrs" v-on="on")
+                  span.font-h5.d-none.d-md-flex 編輯個人資料
+                  v-icon.font-h5.white--text.d-flex.d-md-none mdi-cog
+              v-card#userinfo.bg-white-2.rounded-xl.pa-3.py-5
+                p.font-h2.text-center 編輯個人資料
+                v-divider.my-3.mb-5
+                v-form.px-3
+                  v-row.mx-auto
+                    v-col(cols="12")
+                      div.text-center(v-if="showpond")
+                        file-pond.mb-3(
+                          imageCropAspectRatio="1"
+                          imageResizeTargetWidth="250"
+                          stylePanelLayout='compact circle'
+                          styleLoadIndicatorPosition='center bottom'
+                          styleProgressIndicatorPosition='right bottom'
+                          styleButtonRemoveItemPosition='left bottom'
+                          styleButtonProcessItemPosition='right bottom'
+                          accepted-file-types="image/jpeg, image/png"
+                          label-idle="選擇圖片"
+                          @updatefiles="handleFilePondUpdateFile")
+                        v-btn(text @click="cancelupload")
+                          span.font-h4 取消
+                      div.text-center(v-else)
+                        div.pointer.d-flex.justify-center.mb-3
+                          v-avatar(v-if="author.avatar" :size="100")
+                            img(:src="author.avatar")
+                          avatar(v-else :size="100" :name="author.account" :variant="avatar.variant" :colors="avatar.colors")
+                        v-btn(text @click="showpond = !showpond")
+                          v-icon.mr-3 mdi-pencil
+                          span.font-h4 更換大頭貼
+                    v-col(cols="12")
+                      v-row.mx-auto.mt-3
+                        v-col(cols="4")
+                          div.font-h4 帳號名稱
+                        v-col(cols="8")
+                          div {{author.account}}
+                        v-col(cols="4")
+                          div.font-h4 用戶名稱
+                        v-col(cols="8")
+                          v-text-field.pa-0.ma-0.mb-n6(v-model="form.newname" color="#DEA56A" dense) {{form.newname}}
+                        v-col(cols="4")
+                          div.font-h4 個人簡介
+                        v-col(cols="8")
+                          v-textarea.pa-0.ma-0(v-model="form.newprofile" color="#DEA56A" rows="3" dense placeholder="個人簡介") {{form.newprofile}}
+                    v-col(cols="12")
+                      div.text-right
+                        v-btn(text @click="cancelInfo") 取消
+                        v-btn(text color="#DEA56A" @click="submitInfo") 完成
+            v-btn.orangebtn(depressed @click="follow" v-show="nowuser.showfollow && (user._id !== author._id)")
+              span.font-h5.white--text 追蹤
+            v-btn(depressed outlined color="#DEA56A" @click="follow" v-show="!nowuser.showfollow && (user._id !== author._id)")
+              span.font-h5 追蹤中
+              v-icon(x-small) mdi-chevron-down
+        div.mt-5
+          p(style="white-space: pre-wrap;") {{ author.profile }}
+      v-col(cols="12" lg="4")
+        v-card.pa-6(flat)
+          v-dialog(
+            v-model="flwdialog"
+            max-width="500px")
+            template(v-slot:activator="{ on, attrs }")
+              v-sheet.d-flex.align-center(v-bind="attrs" v-on="on")
+                v-row.text-center
+                  v-col(cols="4")
+                    p {{author.recipes.length}}
+                    div 貼文
+                  v-divider(vertical)
+                  v-col(cols="4")
+                    p {{author.follower.length}}
+                    div 粉絲
+                  v-divider(vertical)
+                  v-col(cols="4")
+                    p {{author.following.length}}
+                    div 追蹤
+            v-card.rounded-xl.pa-6
+              v-sheet.text-center.rounded-xl
+                p.font-h2.orangetext {{author.username}}
+                v-tabs.mb-3(v-model="tab" background-color="transparent" color="#DEA56A" grow)
+                  v-tab(href="#follower") {{author.follower.length}} 粉絲
+                  v-tab(href="#following") {{author.following.length}} 追蹤名單
+                v-tabs-items(v-model="tab")
+                  v-tab-item(:value="'follower'")
+                    v-card(flat).pa-2.px-5
+                      v-sheet(v-for="(item,index) of author.follower" :key="item._id").mb-2
+                        UserCard(:userdata="item" :avatar="avatar" :nowuser="nowuser" :action="'follower'" @sendfollow="userfollow($event, index)")
+                  v-tab-item(:value="'following'")
+                    v-card(flat).pa-2.px-5
+                      v-sheet(v-for="(item,index) of author.following" :key="item._id").mb-2
+                        UserCard(:userdata="item" :avatar="avatar" :nowuser="nowuser" :action="'following'" @sendfollow="userfollow($event, index)")
+      v-col(cols="12").d-flex.align-center
+        p.recipetab.mr-6(@click="refresh('recipe')" :class="rpclass('recipe')") 食譜
+        p.recipetab.mr-6(@click="refresh('favorite')" :class="rpclass('favorite')") 收藏
+        v-divider
+      v-col(cols="12" v-if="recipetab === 'recipe'")
+        v-row
+          v-col(cols="12" md="4" lg="3" v-for="(recipe,index) in author.recipes" :key="recipe._id")
+            router-link(:to="'/recipe/'+recipe._id")
+              UserRecipe(:recipe="recipe" :nowuser="nowuser" v-show="recipe.isEnabled !== 0" @sendlike="like (index)" @sendfav="favorite (index)")
+      v-col(cols="12" v-else)
+        v-row
+          v-col(cols="12" md="4" lg="3" v-for="(recipe,index) in author.favorites" :key="recipe._id")
+            router-link(:to="'/recipe/'+recipe._id")
+              UserRecipe(:recipe="recipe" :nowuser="nowuser" v-show="recipe.isEnabled !== 0" @sendlike="like (index)" @sendfav="favorite (index)")
 </template>
 
 <script>
@@ -185,14 +184,30 @@ export default {
         text: this.nowuser.showfollow ? '成功追蹤' : '取消追蹤'
       })
       this.nowuser.showfollow = !this.nowuser.showfollow
+      const { data } = await this.axios.get('/users/' + this.$route.params.id)
+      this.author.follower = data.result.follower.map(f => {
+        f.users.isfollow = false
+        return f.users
+      })
+      this.author.following = data.result.following.map(f => {
+        f.users.isfollow = false
+        return f.users
+      })
     },
     cancelInfo () {
       this.author.username ? this.form.newname = this.author.username : this.form.newname = this.author.account
       this.author.profile ? this.form.newprofile = this.author.profile : this.form.newprofile = ''
       this.dialog = false
     },
+    cancelupload () {
+      this.showpond = !this.showpond
+      this.form.image = ''
+    },
     async submitInfo () {
       try {
+        if (this.showpond === true && this.form.image === '') {
+          this.form.delavatar = true
+        }
         const fd = new FormData()
         for (const key in this.form) {
           if (Array.isArray(this.form[key]) && key === 'image') {
@@ -217,7 +232,11 @@ export default {
         })
         const { data } = await this.axios.get('/users/' + this.$route.params.id)
         this.author.profile = data.result.profile
-        this.author.avatar = data.result.avatar.map(i => `${process.env.VUE_APP_API}/files/${i}`)[0]
+        if (this.showpond === true && this.form.image === '') {
+          this.author.avatar = ''
+        } else {
+          this.author.avatar = data.result.avatar.map(i => `${process.env.VUE_APP_API}/files/${i}`)[0]
+        }
         this.author.username = data.result.username
         this.form.newname = this.author.username
         this.author.profile ? this.form.newprofile = this.author.profile : this.form.newprofile = ''
@@ -291,11 +310,6 @@ export default {
         if (this.author.favorites[index].favorite) {
           const nowidx = this.nowuser.favorites.map(l => l.recipes).indexOf(this.author.favorites[index]._id)
           this.nowuser.favorites.splice(nowidx, 1)
-          // if (this.nowuser.isauthor) {
-          //   this.author.favorites.splice(index, 1)
-          //   const authoridx = this.author.recipes.map(r => r._id).indexof(this.author.favorites[index]._id)
-          //   this.author.recipes[authoridx].favorite = !this.author.recipes[authoridx].favorite
-          // }
         } else {
           this.nowuser.favorites.push({ recipes: this.author.favorites[index]._id })
         }

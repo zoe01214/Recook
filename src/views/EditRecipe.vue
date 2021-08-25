@@ -1,156 +1,152 @@
 <template lang="pug">
-v-container#new(fluid).mb-12
-  v-container.mb-4
-    v-row
-      v-col(cols="12")
-        v-sheet.d-flex.align-center
-          h2.header-title.mr-6 新增食譜
-          v-divider
-  v-container
-    v-sheet.rounded-xl.bg-white-2.py-5
-      v-card(flat).bg-white-2.bgtrans.mx-auto.pa-6.pa-lg-12
-        v-form(ref="form" v-model="form.valid" lazy-validation)
-          section(v-show="page === 1")
-            p.font-h2.text-center 食譜基本資料
-            v-divider.mb-6
-            div
-              p.font-h3 選擇食譜類型
-                div.d-flex
-                  v-btn.mr-12.typebtn(outlined icon :class="typeclass('text')" @click="form.type = 'text'" x-large)
-                    v-icon mdi-book-open-outline
-                  v-btn.mr-12.typebtn(outlined icon :class="typeclass('video')" @click="form.type = 'video'" x-large)
-                    v-icon mdi-television-classic
-                  v-text-field(outlined color="#DEA56A" v-if="form.type === 'video'" required :rules="ValidYouTubeLink (form.video)" v-model="form.video" placeholder="YOUTUBE 影片連結，例如：https://www.youtube.com/watch?v=E3kREFb3vHg")
-            div
-              p.font-h3 你的食譜應該叫什麼？
-              v-text-field(outlined color="#DEA56A" v-model="form.name" :rules="state.name" :counter="15" placeholder="例如：和風蒜蝦義大利麵" required)
-            div
-              p.font-h3 你的食譜屬於哪個分類？
-                span.ml-2.subtitle-2 (最少勾選一項，最多三項)
-              v-chip-group(v-model="form.classify" color="orange" column multiple max=3)
-                v-chip.chips(:class="chipclass(item)"  outlined v-for="item of classify" :value="item" :key="item") {{item}}
-            div.mt-5
-              p.font-h3 關於你的食譜
-              v-textarea(outlined color="#DEA56A" required v-model="form.description" :rules="state.description" name="input-7-4" placeholder="告訴我們你的料理祕訣或是料理間的趣事！")
-            div
-              p.font-h3 上傳食譜圖片
-              file-pond(
-              name="pond"
-              ref="pond"
-              allow-multiple="true"
-              max-files="5"
-              accepted-file-types="image/jpeg, image/png"
-              label-idle="點擊或拖曳選擇圖片"
-              v-bind:files="form.image"
-              allow-reorder="true"
-              @updatefiles="handleFilePondUpdateFile"
-              @reorderfiles="handleFilePondReoder")
-            div.text-right.mt-8
-              v-btn.ml-auto.nextbtn(large text @click="nextpage" v-show="page!==3")
-                span.font-h3.mr-2 下一步
-                v-icon mdi-arrow-right
-          section(v-show="page === 2")
-            p.font-h2.text-center 食材事前準備
-            v-divider.mb-6
-            div
-              p.font-h3 你的食譜大約幾人份？
-              v-select(
-                color="#DEA56A"
-                :items="servingValue"
-                v-model="form.servings"
-                :rules="state.servings"
-                outlined required placeholder="例如：3人份")
-            div
-              p.font-h3 你的料理時間是幾分鐘？
-              v-select(
-                color="#DEA56A"
-                :items="timeValue"
-                v-model="form.time"
-                :rules="state.time"
-                outlined required placeholder="例如：50分鐘")
-            div
-              p.font-h3 你的食材有哪些？份量是多少？
-              v-row
-                v-col(cols="10")
-                  v-row
-                    v-col.pb-0(cols="6")
-                      v-text-field(outlined color="#DEA56A" required placeholder="食材" :rules="state.ingredient" v-model="newIngredient")
-                    v-col.pb-0(cols="6")
-                      v-text-field(outlined color="#DEA56A" required placeholder="份量" :rules="state.portion" v-model="newPortion" @keyup.enter="addNeed")
-                v-col.pb-0(cols="2").text-center
-                  v-btn.white--text(small fab color="#DEA56A" elevation="0" @click="addNeed")
-                    v-icon mdi-plus
-              template
-                draggable(v-model="needs" @start="dragging = true" @end="dragging = false")
-                  div(v-for="(item,idx) of needs" :key="idx")
-                    v-row
-                      v-col(cols="10")
-                        v-row
-                          v-col(cols="6")
-                            v-sheet.rounded-lg.stepcard.pa-2.px-6
-                              v-text-field( color="#DEA56A" required placeholder="食材" v-if="item.edit" v-model="item.model1")
-                              p(v-else) {{item.ingredient}}
-                          v-col(cols="6")
-                            v-sheet.rounded-lg.stepcard.pa-2.px-6
-                              v-text-field( color="#DEA56A" required placeholder="份量" v-if="item.edit" v-model="item.model2")
-                              p(v-else) {{item.portion}}
-                      v-col(cols="2")
-                        div(v-if="!item.edit").d-flex.justify-center
-                          v-btn.mr-3(x-small fab outline  elevation="0" @click="editNeed(idx)")
-                            v-icon(samll) mdi-pencil
-                          v-btn(x-small fab outline  elevation="0" @click="deleteNeed(idx)")
-                            v-icon mdi-close
-                        div(v-else).d-flex.justify-center
-                          v-btn.mr-3(x-small fab outline  elevation="0" @click="changeNeed(idx)")
-                            v-icon(samll) mdi-check
-                          v-btn(x-small fab outline  elevation="0" @click="cancelNeed(idx)")
-                            v-icon mdi-close
-              div.d-flex.mt-8
-                v-btn.ml-auto.nextbtn(large text @click="prevpage")
-                  v-icon mdi-arrow-left
-                  span.font-h3.mr-2 上一步
-                v-spacer
-                v-btn.ml-auto.nextbtn(large text @click="nextpage")
-                  span.font-h3.mr-2 下一步
-                  v-icon mdi-arrow-right
-          section(v-show="page === 3")
-            p.font-h2.text-center 食譜料理步驟
-            v-divider.mb-6
-            div.mt-3
-              p.font-h3 寫下你的食譜步驟吧！
-              v-row
-                v-col(cols="10")
-                  v-textarea( outlined color="#DEA56A" required placeholder="步驟說明" :rules="state.instructions" v-model="newStep")
-                v-col(cols="2").text-center
-                  v-btn.white--text.my-12(small fab color="#DEA56A" elevation="0" @click="addStep")
-                    v-icon mdi-plus
+v-container#new(fluid).pa-0.px-lg-12.mb-12
+  v-sheet.mx-3.px-lg-12.d-flex.align-center.mb-12
+    h2.header-title.mr-6 編輯食譜
+    v-divider
+  v-sheet.mx-3.mx-lg-10.pa-8.rounded-xl.bg-white-2.mt-12
+    v-card(flat).bg-white-2.bgtrans.pa-3.pa-lg-12
+      v-form(ref="form" v-model="form.valid" lazy-validation)
+        section(v-show="page === 1")
+          p.font-h2.text-center 食譜基本資料
+          v-divider.mb-6
+          div
+            p.font-h3 選擇食譜類型
+              div.d-flex
+                v-btn.mr-12.typebtn(outlined icon :class="typeclass('text')" @click="form.type = 'text'" x-large)
+                  v-icon mdi-book-open-outline
+                v-btn.mr-12.typebtn(outlined icon :class="typeclass('video')" @click="form.type = 'video'" x-large)
+                  v-icon mdi-television-classic
+                v-text-field(outlined color="#DEA56A" v-if="form.type === 'video'" required :rules="ValidYouTubeLink (form.video)" v-model="form.video" placeholder="YOUTUBE 影片連結，例如：https://www.youtube.com/watch?v=E3kREFb3vHg")
+          div
+            p.font-h3 你的食譜應該叫什麼？
+            v-text-field(outlined color="#DEA56A" v-model="form.name" :rules="state.name" :counter="15" placeholder="例如：和風蒜蝦義大利麵" required)
+          div
+            p.font-h3 你的食譜屬於哪個分類？
+              span.ml-2.subtitle-2 (最少勾選一項，最多三項)
+            v-chip-group(v-model="form.classify" color="orange" column multiple max=3)
+              v-chip.chips(:class="chipclass(item)"  outlined v-for="item of classify" :value="item" :key="item") {{item}}
+          div.mt-5
+            p.font-h3 關於你的食譜
+            v-textarea(outlined color="#DEA56A" required v-model="form.description" :rules="state.description" name="input-7-4" placeholder="告訴我們你的料理祕訣或是料理間的趣事！")
+          div
+            p.font-h3 上傳食譜圖片
+            file-pond(
+            name="pond"
+            ref="pond"
+            allow-multiple="true"
+            max-files="5"
+            accepted-file-types="image/jpeg, image/png"
+            label-idle="點擊或拖曳選擇圖片"
+            v-bind:files="form.image"
+            allow-reorder="true"
+            @updatefiles="handleFilePondUpdateFile"
+            @reorderfiles="handleFilePondReoder")
+          div.text-right.mt-8
+            v-btn.ml-auto.nextbtn(large text @click="nextpage" v-show="page!==3")
+              span.font-h3.mr-2 下一步
+              v-icon mdi-arrow-right
+        section(v-show="page === 2")
+          p.font-h2.text-center 食材事前準備
+          v-divider.mb-6
+          div
+            p.font-h3 你的食譜大約幾人份？
+            v-select(
+              color="#DEA56A"
+              :items="servingValue"
+              v-model="form.servings"
+              :rules="state.servings"
+              outlined required placeholder="例如：3人份")
+          div
+            p.font-h3 你的料理時間是幾分鐘？
+            v-select(
+              color="#DEA56A"
+              :items="timeValue"
+              v-model="form.time"
+              :rules="state.time"
+              outlined required placeholder="例如：50分鐘")
+          div
+            p.font-h3 你的食材有哪些？份量是多少？
+            v-row
+              v-col(cols="10")
+                v-row
+                  v-col.pb-0(cols="6")
+                    v-text-field(outlined color="#DEA56A" required placeholder="食材" :rules="state.ingredient" v-model="newIngredient")
+                  v-col.pb-0(cols="6")
+                    v-text-field(outlined color="#DEA56A" required placeholder="份量" :rules="state.portion" v-model="newPortion" @keyup.enter="addNeed")
+              v-col.pb-0(cols="2").text-center
+                v-btn.white--text(small fab color="#DEA56A" elevation="0" @click="addNeed")
+                  v-icon mdi-plus
             template
-              draggable(v-model="steps" @start="dragging = true" @end="dragging = false")
-                div(flat v-for="(item,idx) of steps" :key="idx")
+              draggable(v-model="needs" @start="dragging = true" @end="dragging = false")
+                div(v-for="(item,idx) of needs" :key="idx")
                   v-row
                     v-col(cols="10")
-                      v-sheet.rounded-lg.stepcard.pa-3.px-6
-                        v-textarea(counter rows="3" background-color="transparent" color="#DEA56A" required placeholder="步驟說明" v-if="item.edit" v-model="item.model")
-                        p(v-else style="white-space: pre-wrap;") {{item.steptext}}
+                      v-row
+                        v-col(cols="6")
+                          v-sheet.rounded-lg.stepcard.pa-2.px-6
+                            v-text-field( color="#DEA56A" required placeholder="食材" v-if="item.edit" v-model="item.model1")
+                            p(v-else) {{item.ingredient}}
+                        v-col(cols="6")
+                          v-sheet.rounded-lg.stepcard.pa-2.px-6
+                            v-text-field( color="#DEA56A" required placeholder="份量" v-if="item.edit" v-model="item.model2")
+                            p(v-else) {{item.portion}}
                     v-col(cols="2")
                       div(v-if="!item.edit").d-flex.justify-center
-                        v-btn.mr-3(x-small fab outline  elevation="0" @click="editStep(idx)")
+                        v-btn.mr-3(x-small fab outlined  elevation="0" @click="editNeed(idx)")
                           v-icon(samll) mdi-pencil
-                        v-btn.stepicon(x-small fab outline elevation="0" @click="deleteStep(idx)")
+                        v-btn(x-small fab outlined  elevation="0" @click="deleteNeed(idx)")
                           v-icon mdi-close
                       div(v-else).d-flex.justify-center
-                        v-btn.mr-3(x-small fab outline  elevation="0" @click="changeStep(idx)")
+                        v-btn.mr-3(x-small fab outlined  elevation="0" @click="changeNeed(idx)")
                           v-icon(samll) mdi-check
-                        v-btn(x-small fab outline  elevation="0" @click="cancelStep(idx)")
+                        v-btn(x-small fab outlined  elevation="0" @click="cancelNeed(idx)")
                           v-icon mdi-close
             div.d-flex.mt-8
               v-btn.ml-auto.nextbtn(large text @click="prevpage")
                 v-icon mdi-arrow-left
                 span.font-h3.mr-2 上一步
               v-spacer
-              v-btn.ml-auto.orangebtn(large text @click="submitModel")
-                span.font-h3.mr-2 完成
-                v-icon mdi-hand-okay
+              v-btn.ml-auto.nextbtn(large text @click="nextpage")
+                span.font-h3.mr-2 下一步
+                v-icon mdi-arrow-right
+        section(v-show="page === 3")
+          p.font-h2.text-center 食譜料理步驟
+          v-divider.mb-6
+          div.mt-3
+            p.font-h3 寫下你的食譜步驟吧！
+            v-row
+              v-col(cols="10")
+                v-textarea( outlined color="#DEA56A" required placeholder="步驟說明" :rules="state.instructions" v-model="newStep")
+              v-col(cols="2").text-center
+                v-btn.white--text.my-12(small fab color="#DEA56A" elevation="0" @click="addStep")
+                  v-icon mdi-plus
+          template
+            draggable(v-model="steps" @start="dragging = true" @end="dragging = false")
+              div(flat v-for="(item,idx) of steps" :key="idx")
+                v-row
+                  v-col(cols="10")
+                    v-sheet.rounded-lg.stepcard.pa-3.px-6
+                      v-textarea(counter rows="3" background-color="transparent" color="#DEA56A" required placeholder="步驟說明" v-if="item.edit" v-model="item.model")
+                      p(v-else style="white-space: pre-wrap;") {{item.steptext}}
+                  v-col(cols="2")
+                    div(v-if="!item.edit").d-flex.justify-center
+                      v-btn.mr-3(x-small fab outlined  elevation="0" @click="editStep(idx)")
+                        v-icon(samll) mdi-pencil
+                      v-btn.stepicon(x-small fab outlined elevation="0" @click="deleteStep(idx)")
+                        v-icon mdi-close
+                    div(v-else).d-flex.justify-center
+                      v-btn.mr-3(x-small fab outlined  elevation="0" @click="changeStep(idx)")
+                        v-icon(samll) mdi-check
+                      v-btn(x-small fab outlined  elevation="0" @click="cancelStep(idx)")
+                        v-icon mdi-close
+          div.d-flex.mt-8
+            v-btn.ml-auto.nextbtn(large text @click="prevpage")
+              v-icon mdi-arrow-left
+              span.font-h3.mr-2 上一步
+            v-spacer
+            v-btn.ml-auto.orangebtn(large text @click="submitModel")
+              span.font-h3.mr-2 完成
+              v-icon mdi-hand-okay
 </template>
 
 <script>
@@ -370,6 +366,16 @@ export default {
     },
     handleFilePondReoder (files) {
       this.form.image = files.map(files => files.file)
+    },
+    typeclass (value) {
+      return this.form.type === value ? 'typebtn-active' : ''
+    },
+    chipclass (value) {
+      let result = false
+      if (this.form.classify !== '') {
+        result = this.form.classify.some(c => c === value)
+      }
+      return result ? 'chips-active' : ''
     }
   },
   async mounted () {
@@ -380,7 +386,6 @@ export default {
         name: data.result.name,
         type: data.result.type,
         description: data.result.description,
-        video: data.result.video,
         servings: data.result.servings,
         time: data.result.time,
         image: data.result.image.map(i => `${process.env.VUE_APP_API}/files/${i}`),
@@ -388,6 +393,9 @@ export default {
         ingredients: [],
         instructions: [],
         classify: data.result.classify
+      }
+      if (data.result.video !== undefined) {
+        this.form.video = data.result.video
       }
       for (const i of data.result.ingredients) {
         this.needs.push({

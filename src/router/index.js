@@ -23,6 +23,14 @@ const routes = [
     }
   },
   {
+    path: '/about',
+    name: 'About',
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    meta: {
+      title: '關於我們 - Recook'
+    }
+  },
+  {
     path: '/user/:id',
     name: 'Userpage',
     component: () => import(/* webpackChunkName: "userpage" */ '../views/Userpage.vue'),

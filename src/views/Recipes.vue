@@ -1,12 +1,12 @@
 <template lang="pug">
-v-container(fluid)#recipes.pb-6.px-lg-12
-  v-row
-    v-col(cols="12")
-      v-container.d-flex.justify-center
+v-container(fluid)#recipes.pa-0.px-lg-12.mb-12
+  v-row.mx-3.mx-lg-10
+    v-col(cols="12").px-0
+      div.d-flex.justify-center
         v-sheet.searchbar-big.rounded-xl.d-flex.align-center
           v-icon.px-3 mdi-magnify
           input(v-model="query" type="text" placeholder="搜尋食譜 / 食材 / 作者")
-    v-col(cols="12").mb-lg-8
+    v-col(cols="12").px-0.mb-lg-8
       v-row.d-flex.align-center
         v-col(cols="12").relative
           v-row.d-flex.align-center
@@ -61,7 +61,8 @@ v-container(fluid)#recipes.pb-6.px-lg-12
                         v-spacer
                         v-sheet
                           div {{filternum}}
-    v-col(cols="12" md="3" sm="6" v-for="(recipe,index) in showrecipes" :key="recipe._id")
+  v-row.mx-1.mx-lg-8
+    v-col(cols="12" lg="3" md="4" sm="6" v-for="(recipe,index) in showrecipes" :key="recipe._id")
       RecipeCard(:recipe="recipe" :nowuser="nowuser" @sendlike="likes(index)" @sendfav="favorites(index)")
 </template>
 
@@ -201,7 +202,7 @@ export default ({
         }
         if (this.nowuser.favorites !== undefined) {
           this.recipes.map(recipe => {
-            recipe.favorite = this.nowuser.favorites.some(f => f.recipes === recipe._id)
+            recipe.favorite = this.nowuser.favorites.some(f => f.recipes._id === recipe._id)
             return recipe
           })
         } else {

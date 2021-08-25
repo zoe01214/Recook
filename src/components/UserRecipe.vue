@@ -1,6 +1,6 @@
 <template lang="pug">
-v-card.mx-auto(max-width="300" elevation="0")
-  v-img.rounded-lg(height="250" :src="recipe.image[0]")
+v-card.mx-auto(flat)
+  v-img.rounded-lg( :src="recipe.image[0]")
     div.d-flex.align-center
       v-btn(x-small fab icon @click.prevent="sendlike")
         v-icon.white--text {{likeicon}}

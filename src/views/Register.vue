@@ -1,25 +1,20 @@
 <template lang="pug">
-v-container#register(fluid).pa-0.mb-12
-  v-container.mb-4
-    v-row
-      v-col(cols="12")
-        v-sheet.px-12.d-flex.align-center
-          h2.ctitle.mr-6 會員註冊
-          v-divider
-  v-container
-    v-sheet.mx-10.rounded-xl.bg-white-2.py-5
-      v-card(flat max-width="550px").bg-white-2.text-center.bgtrans.mx-auto.pa-12
-        v-form(ref="form" lazy-validation width="100%" @submit.prevent="submit")
-          h2.pb-6 加入 RECOOK 參與更多料理盛事
-          v-text-field.pa-2(color="#DEA56A" v-model="form.account"  :rules="state.account" :counter="20" label="account" placeholder="請輸入帳號" required)
-          v-text-field.pa-2(color="#DEA56A" v-model="form.password"  :rules="state.password" :counter="20" label="password" placeholder="請輸入密碼" required)
-          v-text-field.pa-2(color="#DEA56A" v-model="form.email" :rules="state.email" label="E-mail" placeholder="請輸入電子信箱" required)
-          p.d-flex
-            v-btn(plain) 忘記密碼?
-            v-spacer
-            v-btn(plain to='/login') 已經擁有帳號?
-          p.text-center
-            v-btn.loginbtn(:disabled="!form.valid"  @click="submit") 送出
+v-container#register(fluid).pa-0.px-lg-12
+  v-sheet.mx-3.px-lg-12.d-flex.align-center.mb-12
+    h2.header-title.mr-6 會員註冊
+    v-divider
+  v-sheet.mx-3.mx-lg-10.pa-8.rounded-xl.bg-white-2.mt-12
+    v-card(flat max-width="550px").bg-white-2.text-center.bgtrans.mx-auto.pa-12
+      v-form(ref="form" lazy-validation width="100%" @submit.prevent="submit")
+        h2.pb-6 加入 RECOOK 參與更多料理盛事
+        v-text-field.pa-2(color="#DEA56A" v-model="form.account"  :rules="state.account" :counter="20" label="account" placeholder="請輸入帳號" required)
+        v-text-field.pa-2(color="#DEA56A" v-model="form.password" :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" @click:append="show1 = !show1" :rules="state.password" :counter="20" label="password" placeholder="請輸入密碼" required)
+        v-text-field.pa-2(color="#DEA56A" v-model="form.email" :rules="state.email" label="E-mail" placeholder="請輸入電子信箱" required)
+        p.text-center
+          v-btn(plain to='/login')
+            span.text-body-1 已經擁有帳號?
+        p.text-center
+          v-btn.loginbtn(:disabled="!form.valid"  @click="submit") 送出
 </template>
 
 <script>
@@ -34,7 +29,8 @@ export default {
         account: '',
         password: '',
         email: ''
-      }
+      },
+      show1: false
     }
   },
   computed: {

@@ -1,36 +1,32 @@
 <template lang="pug">
-v-container#checkout(fluid).pa-0.mb-12
-  v-container.mb-4
-    v-row
-      v-col(cols="12")
-        v-sheet.px-12.d-flex.align-center
-          h2.header-title.mr-6 訂單資料
-          v-divider
-  v-container
-    v-sheet.mx-10.rounded-xl.bg-white-2.pa-10
-      p.font-h3 1.收件人資料
-      v-form
-        v-text-field(outlined label="收件人姓名" v-model="form.name")
-        v-text-field(outlined label="收件人手機號碼" maxlength="10" v-model="form.phone")
-        v-text-field(outlined label="請輸入地址" v-model="form.address")
-      p.font-h3 2.付款資訊
-      vue-paycard(:value-fields="valueFields" :valueFields="valueFields")
-      v-form
-        p 卡號
-        v-text-field(data-card-field outlined autocomplete="off" :maxLength="cardNumberMaxLength" @input="changeNumber" :id="inputFields.cardNumber" v-model="valueFields.cardNumber")
-        p 姓名(英文字母)
-        v-text-field(data-card-field outlined :id="inputFields.cardName" v-model="valueFields.cardName")
-        div.d-flex
-          div.mr-12
-            p 有效日期
-            div.d-flex
-              v-select.mr-3(data-card-field outlined :id="inputFields.cardMonth" :items="month" v-model="valueFields.cardMonth")
-              v-select(data-card-field outlined :id="inputFields.cardYear" :items="year" v-model="valueFields.cardYear")
-          div
-            p 末三碼
-            v-text-field(data-card-field autocomplete="off" maxlength="3" :id="inputFields.cardCvv" outlined v-model.number="valueFields.cardCvv")
-      v-btn.white--text(block elevation="0" color="#DEA56A" @click="checkout")
-        span.font-h3 送出訂單
+v-container#checkout(fluid).pa-0.px-lg-12.mb-12
+  v-sheet.mx-3.px-lg-12.d-flex.align-center.mb-12
+    h2.header-title.mr-6 訂單資料
+    v-divider
+  v-sheet.mx-3.mx-lg-10.pa-8.rounded-xl.bg-white-2.mt-12
+    p.font-h3 1.收件人資料
+    v-form
+      v-text-field(outlined label="收件人姓名" v-model="form.name")
+      v-text-field(outlined label="收件人手機號碼" maxlength="10" v-model="form.phone")
+      v-text-field(outlined label="請輸入地址" v-model="form.address")
+    p.font-h3 2.付款資訊
+    vue-paycard(:value-fields="valueFields" :valueFields="valueFields")
+    v-form
+      p 卡號
+      v-text-field(data-card-field outlined autocomplete="off" :maxLength="cardNumberMaxLength" @input="changeNumber" :id="inputFields.cardNumber" v-model="valueFields.cardNumber")
+      p 姓名(英文字母)
+      v-text-field(data-card-field outlined :id="inputFields.cardName" v-model="valueFields.cardName")
+      div.d-flex
+        div.mr-12
+          p 有效日期
+          div.d-flex
+            v-select.mr-3(data-card-field outlined :id="inputFields.cardMonth" :items="month" v-model="valueFields.cardMonth")
+            v-select(data-card-field outlined :id="inputFields.cardYear" :items="year" v-model="valueFields.cardYear")
+        div
+          p 末三碼
+          v-text-field(data-card-field autocomplete="off" maxlength="3" :id="inputFields.cardCvv" outlined v-model.number="valueFields.cardCvv")
+    v-btn.white--text.my-6(block elevation="0" color="#DEA56A" @click="checkout")
+      span.font-h3 送出訂單
 </template>
 
 <script>

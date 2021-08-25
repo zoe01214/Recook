@@ -87,12 +87,17 @@
     text-transform:lowercase;
   }
   
+  .padding{
+    padding: 0 1rem;
+  }
+  
   @media (max-width: 600px) {
     .searchbar-big{
       width: 80%;
     }
   }
 }
+
 // recipes-filter 食譜分類中使用
 .checktext{
   cursor: pointer;

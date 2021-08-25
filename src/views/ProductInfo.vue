@@ -1,35 +1,31 @@
 <template lang="pug">
-v-container#productinfo(fluid).pa-0.mb-12
-  v-container.mb-4
-    v-row
-      v-col(cols="12")
-        v-sheet.px-12.d-flex.align-center
-          h2.header-title.mr-6 主廚市集
-          v-divider
-  v-container(v-if="product.sell")
+v-container(fluid)#productinfo.pa-0.px-lg-12
+  v-sheet.mx-3.px-lg-12.d-flex.align-center.mb-12
+    h2.header-title.mr-6 主廚市集
+    v-divider
+  v-sheet.mx-3.mx-lg-10.pa-8.rounded-xl.bg-white-2.mt-12(v-if="product.sell")
+    v-row.pa-6.px-lg-12
+      v-col(cols="12" md="5")
+        v-sheet.bgtrans.px-lg-12.d-flex.justify-center
+          v-img.circle(contain max-width="250px" :src="product.image")
+      v-col(cols="12" md="7")
+        v-card(flat).bgtrans
+          h2.name.mb-5 {{product.name}}
+          p.distext {{product.discounttext}}
+          v-divider.my-6
+          p.mb-3
+            strong 商品詳情
+          p(v-html="product.description")
+          v-row.d-flex.align-center.mt-12
+            v-col(cols="12" lg="6")
+              InputNumber.numtext(v-model.number="amount" :rules="state.amount")
+            v-col(cols="12" lg="6")
+              v-sheet.btnborder.d-flex.align-center.text-center.bgtrans
+                div.pa-2.pricetext NT.{{product.price}}
+                button(@click="addcart").pa-2.bagtext 放進購物車
+  v-container(v-cloak v-else)
     v-sheet.mx-10.rounded-xl.bg-white-2
-      v-row.pa-6.px-12
-        v-col(cols="12" md="5")
-          v-sheet.bgtrans.px-12.d-flex.justify-center
-            v-img.circle(contain max-width="250px" :src="product.image")
-        v-col(cols="12" md="7")
-          v-card(flat).bgtrans
-            h2.name.mb-5 {{product.name}}
-            p.distext {{product.discounttext}}
-            v-divider.my-6
-            p.mb-3
-              strong 商品詳情
-            p(v-html="product.description")
-            v-row.d-flex.align-center
-              v-col(cols="12" lg="6")
-                InputNumber.numtext(v-model.number="amount" :rules="state.amount")
-              v-col(cols="12" lg="6")
-                v-sheet.btnborder.d-flex.align-center.text-center.bgtrans
-                  div.pa-2.pricetext NT.{{product.price}}
-                  button(@click="addcart").pa-2.bagtext 放進購物車
-  v-container(v-else)
-    v-sheet.mx-10.rounded-xl.bg-white-2
-       h2 這項商品已經下架囉！
+       v-alert(type="error") 這項商品已經下架囉！
 </template>
 
 <script>

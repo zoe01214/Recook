@@ -1,5 +1,5 @@
 <template lang="pug">
-router-link(:to="'/user/'+ uid")
+router-link#usercard(:to="'/user/'+ uid")
   v-sheet.d-flex.align-center
     v-avatar.d-flex.mr-3(v-if="uavatar" :size="avatar.size -20")
       img(:src="uavatar")
@@ -8,8 +8,8 @@ router-link(:to="'/user/'+ uid")
       h3.mb-2 {{uname}}
       div.text-subtitle-2.grey--text.font-weight-light.mt-n2 {{uaccount}}
     v-spacer
-    v-btn.w(small depressed outlined color="grey" @click.prevent="sendfollow")
-      span {{btnname}}
+    v-btn.w(small text :class="btnclass" @click.prevent="sendfollow" v-if="uid !== user._id")
+      span.subtitle-2 {{btnname}}
 </template>
 
 <script>
@@ -51,6 +51,17 @@ export default ({
         }
       } else {
         return this.userdata.isfollow === true ? '追蹤中' : '追蹤'
+      }
+    },
+    btnclass () {
+      if (this.action === 'follower') {
+        if (this.nowuser.isauthor) {
+          return this.userdata.isfollow === true ? 'orangebtn' : 'greybtn-border'
+        } else {
+          return this.userdata.isfollow === true ? 'orangebtn-border' : 'orangebtn'
+        }
+      } else {
+        return this.userdata.isfollow === true ? 'orangebtn-border' : 'orangebtn'
       }
     }
   },
