@@ -64,6 +64,7 @@ v-container(fluid)#recipes.pa-0.px-lg-12.mb-12
   v-row.mx-1.mx-lg-8
     v-col(cols="12" lg="3" md="4" sm="6" v-for="(recipe,index) in showrecipes" :key="recipe._id")
       RecipeCard(:recipe="recipe" :nowuser="nowuser" @sendlike="likes(index)" @sendfav="favorites(index)")
+  loading(:active.sync="isLoading")
 </template>
 
 <script>
@@ -76,6 +77,8 @@ export default ({
     return {
       recipes: [],
       showrecipes: [],
+      isLoading: false,
+      fullPage: true,
       nowuser: {
         likes: [],
         favorites: []
@@ -173,6 +176,8 @@ export default ({
   },
   async mounted () {
     try {
+      const vm = this
+      vm.isLoading = true
       const { data } = await this.axios.get('/recipes/?sort=likes')
       this.recipes = data.result.map(recipe => {
         if (recipe.image) {
@@ -185,6 +190,7 @@ export default ({
         }
         return recipe
       })
+      vm.isLoading = false
       this.recipes = this.recipes.filter(r => r.isEnabled !== 0)
       if (this.user.islogin) {
         const user = await this.axios.get('/users/' + this.$store.state.user._id)

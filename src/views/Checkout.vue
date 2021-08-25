@@ -84,6 +84,7 @@ export default {
           title: '成功',
           text: '您的訂單已送出'
         })
+        this.$store.commit('changecart', {})
         this.$router.push('/orders')
       } catch (error) {
         this.$swal({

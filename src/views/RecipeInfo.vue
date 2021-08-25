@@ -455,8 +455,7 @@ export default {
           trigger: '.imgfixed',
           start: 'top top',
           end: 'top top',
-          scrub: true,
-          markers: true
+          scrub: true
         },
         position: 'relative',
         'max-width': '380px'

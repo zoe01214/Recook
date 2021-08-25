@@ -17,6 +17,7 @@ v-container(fluid)#products.pa-0.px-lg-12.mb-12
               v-sheet.btnborder.d-flex.align-center.text-center.bgtrans
                 div(:style="greyoutline(item.quantity)").pa-2.pricetext NT.{{item.price}}
                 button(@click.prevent="addcart(item._id)" :style="outofstock(item.quantity)").pa-2.bagtext {{outofstocktext(item.quantity)}}
+  loading(:active.sync="isLoading")
 </template>
 
 <script>
@@ -24,7 +25,9 @@ export default ({
   name: 'Products',
   data () {
     return {
-      products: []
+      products: [],
+      isLoading: false,
+      fullPage: true
     }
   },
   methods: {
@@ -74,12 +77,20 @@ export default ({
   },
   async mounted () {
     try {
+      const vm = this
+      vm.isLoading = true
       const { data } = await this.axios.get('/products')
       this.products = data.result.map(p => {
         p.image = p.image.map(i => `${process.env.VUE_APP_API}/files/${i}`)
         return p
       })
+      vm.isLoading = false
     } catch (error) {
+      this.$swal({
+        icon: 'error',
+        title: '錯誤',
+        text: '取得商品失敗'
+      })
     }
   }
 })

@@ -39,7 +39,7 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
         router-link(:to="'/user/' + user._id")
           v-sheet(height="300px")
             v-sheet.rounded-lg(height="100%" v-if="user.avatar && user.avatar.length !== 0" outlined)
-              v-img.rounded(height="90%" :src="user.avatar[0]")
+              v-img.rounded(height="100%" :src="user.avatar[0]")
             v-sheet.rounded-lg.bg-white-2(v-else outlined height="100%").d-flex.align-center.justify-center
               avatar(:size="avatar.size" :name="user.account" :square="avatar.square" :variant="avatar.variant" :colors="avatar.colors")
           v-sheet.mt-3
@@ -105,6 +105,7 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
         span.black--text.mr-3.font-weight-bold 前往了解
         v-icon.iconcircle mdi-chevron-right
   v-divider.py-6
+  loading(:active.sync="isLoading")
 </template>
 
 <script>
@@ -184,14 +185,41 @@ export default {
         colors: ['#F0F2DC', '#F9D365', '#D9EB52', '#87796F', '#9FA789'],
         variant: 'beam'
       },
-      email: ''
+      email: '',
+      isLoading: false,
+      fullPage: true
     }
   },
   components: {
     RecipeCard
   },
+  methods: {
+    async likes (index) {
+      if (this.recipes[index].like) {
+        const idx = this.recipes[index].likes.map(l => l.users).indexOf(this.$store.state.user._id)
+        this.recipes[index].likes.splice(idx, 1)
+        const nowidx = this.nowuser.likes.map(l => l.recipes).indexOf(this.recipes[index]._id)
+        this.nowuser.likes.splice(nowidx, 1)
+      } else {
+        this.recipes[index].likes.push({ user: this.$store.state.user._id })
+        this.nowuser.likes.push({ recipes: this.recipes[index]._id })
+      }
+      this.recipes[index].like = !this.recipes[index].like
+    },
+    async favorites (index) {
+      if (this.recipes[index].favorite) {
+        const nowidx = this.nowuser.favorites.map(l => l.recipes).indexOf(this.recipes[index]._id)
+        this.nowuser.favorites.splice(nowidx, 1)
+      } else {
+        this.nowuser.favorites.push({ recipes: this.recipes[index]._id })
+      }
+      this.recipes[index].favorite = !this.recipes[index].favorite
+    }
+  },
   async mounted () {
     try {
+      const vm = this
+      vm.isLoading = true
       const { data } = await this.axios.get('/recipes/home')
       const popular = await this.axios.get('/users/home')
       const product = await this.axios.get('/products/home')
@@ -214,6 +242,7 @@ export default {
         }
         return u
       })
+      console.log(this.users)
       this.products = product.data.result.map(p => {
         if (p.image) {
           p.image = p.image.map(r => `${process.env.VUE_APP_API}/files/${r}`)
@@ -224,7 +253,8 @@ export default {
         p.image = p.image.map(r => `${process.env.VUE_APP_API}/files/${r}`)
         return p
       })
-
+      vm.isLoading = false
+      console.log(vm.isLoading)
       if (this.user.islogin) {
         const user = await this.axios.get('/users/' + this.$store.state.user._id)
         this.nowuser = {

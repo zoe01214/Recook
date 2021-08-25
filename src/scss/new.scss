@@ -47,6 +47,16 @@
     color: white;
   }
   
+  .imagecard{
+    position: relative;
+    .btnclose{
+      background: rgba(0,0,0,0.8);
+    }
+    .btnclose:hover{
+      background: rgba(0,0,0,0.8);
+      border:2px solid white;
+    }
+  }
   @media (max-width: 600px) {
     .font-h2{
       font-size: 1.2rem;

@@ -30,6 +30,14 @@ v-container#new(fluid).pa-0.px-lg-12.mb-12
             v-textarea(outlined color="#DEA56A" required v-model="form.description" :rules="state.description" name="input-7-4" placeholder="告訴我們你的料理祕訣或是料理間的趣事！")
           div
             p.font-h3 上傳食譜圖片
+            v-divider.my-3
+            template
+              draggable(v-model="image" @start="dragging = true" @end="dragging = false")
+                v-sheet.bg-white-2.imagecard(width="25%" v-for="(item,index) of image" :key="item")
+                  v-img.rounded(height="200" :src="item")
+                  v-btn.btnclose(icon @click="delimage(index)" absolute top right)
+                    v-icon.white--text.text-subtitle-2 mdi-close
+            v-divider.my-3
             file-pond(
             name="pond"
             ref="pond"
@@ -39,8 +47,7 @@ v-container#new(fluid).pa-0.px-lg-12.mb-12
             label-idle="點擊或拖曳選擇圖片"
             v-bind:files="form.image"
             allow-reorder="true"
-            @updatefiles="handleFilePondUpdateFile"
-            @reorderfiles="handleFilePondReoder")
+            @updatefiles="handleFilePondUpdateFile")
           div.text-right.mt-8
             v-btn.ml-auto.nextbtn(large text @click="nextpage" v-show="page!==3")
               span.font-h3.mr-2 下一步
@@ -172,6 +179,7 @@ export default {
         _id: '',
         classify: ''
       },
+      image: [],
       needs: [],
       newIngredient: '',
       newPortion: '',
@@ -183,7 +191,6 @@ export default {
   computed: {
     state () {
       const name = this.form.name
-      const image = this.form.image
       const description = this.form.description
       const servings = this.form.servings
       const time = this.form.time
@@ -192,7 +199,6 @@ export default {
       const portion = this.newPortion
       return {
         name: [!!name || '食譜名稱不得為空值', name.length >= 5 || '食譜名稱最少 5 個字', name.length <= 20 || '食譜名稱最多 20 個字'],
-        image: [!!image || '請上傳至少一張照片', image.length >= 1 || '請上傳至少 1 張照片', image.length < 5 || '照片最多 5 張'],
         description: [!!description || '食譜簡介至少 10 個字', description.length >= 10 || '食譜簡介最少 10 個字', description.length <= 400 || '食譜簡介不得超過 400 個字'],
         servings: [!!servings || '請選擇食譜份量'],
         time: [!!time || '請選擇料理時間'],
@@ -309,8 +315,18 @@ export default {
             title: '錯誤',
             text: '請輸入食材項目與料理步驟'
           })
-        } else if (this.form.image.length !== 0) {
+        } if (this.image.length === 0 && this.form.image.length === 0) {
+          this.$swal({
+            icon: 'error',
+            title: '錯誤',
+            text: '請至少上傳一張照片'
+          })
+        } else {
           try {
+            this.form.orgimage = []
+            if (this.image.length !== 0) {
+              this.form.orgimage = this.image
+            }
             for (const s of this.steps) {
               this.form.instructions.push(s.steptext.toString())
             }
@@ -322,9 +338,13 @@ export default {
             }
             const fd = new FormData()
             for (const key in this.form) {
-              if (Array.isArray(this.form[key]) && key !== 'image') {
+              if (Array.isArray(this.form[key]) && key !== 'image' && key !== 'orgimage') {
                 fd.append(key, JSON.stringify(this.form[key]))
               } else if (Array.isArray(this.form[key]) && key === 'image') {
+                for (const i in this.form[key]) {
+                  fd.append(key, this.form[key][i])
+                }
+              } else if (Array.isArray(this.form[key]) && key === 'orgimage') {
                 for (const i in this.form[key]) {
                   fd.append(key, this.form[key][i])
                 }
@@ -352,19 +372,12 @@ export default {
               text: error.response.data.message
             })
           }
-        } else {
-          this.$swal({
-            icon: 'error',
-            title: '錯誤',
-            text: '請至少上傳一張食譜照片'
-          })
         }
       }
     },
     handleFilePondUpdateFile (files) {
-      this.form.image = files.map(files => files.file)
-    },
-    handleFilePondReoder (files) {
+      console.log(typeof (files[0]))
+      console.log(files[0].file.name)
       this.form.image = files.map(files => files.file)
     },
     typeclass (value) {
@@ -376,6 +389,22 @@ export default {
         result = this.form.classify.some(c => c === value)
       }
       return result ? 'chips-active' : ''
+    },
+    async delimage (index) {
+      try {
+        await this.axios.patch('/recipes/delimage/' + this.form._id, { index: index }, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.state.jwt.token
+          }
+        })
+        this.image.splice(index, 1)
+      } catch (error) {
+        this.$swal({
+          icon: 'error',
+          title: '錯誤',
+          text: '刪除圖片失敗'
+        })
+      }
     }
   },
   async mounted () {
@@ -386,14 +415,15 @@ export default {
         name: data.result.name,
         type: data.result.type,
         description: data.result.description,
+        image: [],
         servings: data.result.servings,
         time: data.result.time,
-        image: data.result.image.map(i => `${process.env.VUE_APP_API}/files/${i}`),
         _id: data.result._id,
         ingredients: [],
         instructions: [],
         classify: data.result.classify
       }
+      this.image = data.result.image.map(i => `${process.env.VUE_APP_API}/files/${i}`)
       if (data.result.video !== undefined) {
         this.form.video = data.result.video
       }

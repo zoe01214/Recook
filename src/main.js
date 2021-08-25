@@ -35,6 +35,9 @@ import VuePaycard from 'vue-paycard'
 import VueEditor from 'vue2-editor'
 import VueGtag from 'vue-gtag'
 
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
+
 Vue.use(VueGtag, {
   config: { id: 'G-8Z1XETWKQ7' }
 })
@@ -54,6 +57,8 @@ Vue.component('FilePond', vueFilePond(
 ))
 Vue.component('ImgInputer', ImgInputer)
 Vue.component('avatar', Avatar)
+Vue.component('Loading', Loading)
+
 Vue.use(VueEditor)
 Vue.use(VueSplide)
 

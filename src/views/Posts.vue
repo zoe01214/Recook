@@ -13,6 +13,7 @@ v-container(fluid)#posts.pa-0.px-lg-12.mb-12
               v-sheet.rounded.mx-12.mb-4.tag {{item.type}}
               h3.mb-2.ptitle {{item.title}}
               div.content(v-html="item.content")
+  loading(:active.sync="isLoading")
 </template>
 
 <script>
@@ -20,17 +21,27 @@ export default ({
   name: 'Posts',
   data () {
     return {
-      posts: []
+      posts: [],
+      isLoading: false,
+      fullPage: true
     }
   },
   async mounted () {
     try {
+      const vm = this
+      vm.isLoading = true
       const { data } = await this.axios.get('/posts')
       this.posts = data.result.map(p => {
         p.image = p.image.map(i => `${process.env.VUE_APP_API}/files/${i}`)
         return p
       })
+      vm.isLoading = false
     } catch (error) {
+      this.$swal({
+        icon: 'error',
+        title: '錯誤',
+        text: '取得文章失敗'
+      })
     }
   }
 })
