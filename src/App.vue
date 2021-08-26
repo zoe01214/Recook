@@ -28,21 +28,23 @@
       v-card.rounded-xl.vh-100
         v-sheet.px-3.px-sm-6.px-lg-10
           v-sheet.white.py-12.d-flex.align-center.navshadow#mainmenu
-            v-container(fluid).px-lg-12
+            v-container.px-lg-12.d-flex.justify-center.d-md-none
+              v-img(contain max-width="20vw" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+            v-container(fluid).px-lg-12.d-none.d-md-flex
               v-row.d-flex.align-center
-                v-col(cols="0" md="5")
-                  nav.d-none.d-md-flex.align-center
+                v-col(cols="5")
+                  nav.d-flex.align-center
                     router-link(to="/recipes")
                       div.navlist(:class="tabActive('/recipes')") 探索食譜
-                    router-link.mx-6(:to="'/posts'")
+                    router-link.mx-3.mx-lg-6(:to="'/posts'")
                       div.navlist(:class="tabActive('/posts')") 料理生活
                     router-link(:to="'/products'")
                       div.navlist(:class="tabActive('/products')") 主廚市集
-                v-col(cols="12"  md="2")
+                v-col(cols="2")
                   router-link.d-flex.justify-center(to='/')
-                      img.logotext(:src="require('./assets/logotext.svg')" @click="nowtab = '/'")
-                v-col(cols="0"  md="5")
-                  nav.d-none.d-md-flex.align-center.justify-end
+                      v-img(contain max-width="150" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+                v-col(cols="5")
+                  nav.d-flex.align-center.justify-end
                     router-link(to="/recipes")
                       v-icon.black--text mdi-magnify
                     v-menu(v-if="user.islogin" bottom :nudge-width="120" :nudge-left="50" :nudge-bottom="20" offset-y transition="slide-y-transition")
@@ -123,6 +125,11 @@
           v-list-item-group(color="#DEA56A" active-class="orangebg")
             v-list-item(to="/new")
               span 寫食譜
+              v-spacer
+              v-icon.iconcircle mdi-chevron-right
+            v-divider.my-3
+            v-list-item(:to="'/cart'")
+              span 購物車
               v-spacer
               v-icon.iconcircle mdi-chevron-right
             v-divider.my-3
