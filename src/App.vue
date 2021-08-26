@@ -26,13 +26,13 @@
           v-btn(v-else small color="grey" outlined to="/login")
               span.subtitle-1.font-weight-bold.black--text ✌️ 登入
       v-card.rounded-xl.vh-100
-        v-sheet.px-3.px-sm-6.px-lg-10
+        v-sheet.px-3.px-sm-6
           v-sheet.white.py-12.d-flex.justify-center.align-center.rounded-xl#mainmenu
-            v-sheet(width="100%" height="45px").text-center.d-md-none
-              img.d-md-none(height="45px" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
-            v-container(fluid).px-lg-12.d-none.d-md-flex
+            v-container(fluid).px-lg-12
               v-row.d-flex.align-center
-                v-col(cols="5")
+                v-col(cols="12").d-flex.justify-center.d-md-none
+                  v-img.d-md-none(contain max-width="85" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+                v-col(cols="5").d-none.d-md-flex
                   nav.d-flex.align-center
                     router-link(to="/recipes")
                       div.navlist(:class="tabActive('/recipes')") 探索食譜
@@ -40,10 +40,10 @@
                       div.navlist(:class="tabActive('/posts')") 料理生活
                     router-link(:to="'/products'")
                       div.navlist(:class="tabActive('/products')") 主廚市集
-                v-col(cols="2")
+                v-col(cols="2").d-none.d-md-flex
                   router-link.d-flex.justify-center(to='/')
                       v-img(contain max-width="150" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
-                v-col(cols="5")
+                v-col(cols="5").d-none.d-md-flex.justify-end
                   nav.d-flex.align-center.justify-end
                     router-link(to="/recipes")
                       v-icon.black--text mdi-magnify
@@ -92,8 +92,12 @@
         v-icon.text-color(@click="menudwr = !menudwr") {{menuicon}}
       router-link.applist(to="/products")
         v-icon.text-color mdi-shopping-outline
-      router-link.applist(:to="'/user/'+user._id")
-        v-icon.text-color mdi-account-outline
+      div.applist(v-if="user.islogin")
+        router-link(:to="'/user/'+user._id")
+          v-icon.text-color mdi-account-outline
+      div.applist(v-else)
+        router-link(to="/login")
+          v-icon.text-color mdi-account-outline
     v-navigation-drawer.menudwr(width="100%" v-model="menudwr" app bottom temporary)
       v-sheet.pa-6.pb-12
         div.mb-6
@@ -128,12 +132,16 @@
               v-spacer
               v-icon.iconcircle mdi-chevron-right
             v-divider.my-3
-            v-list-item(:to="'/cart'")
+            v-list-item(to="/cart")
               span 購物車
               v-spacer
               v-icon.iconcircle mdi-chevron-right
             v-divider.my-3
-            v-list-item(:to="'/user/'+user._id")
+            v-list-item(v-if="user.islogin" :to="'/user/'+user._id")
+              span 個人頁面
+              v-spacer
+              v-icon.iconcircle mdi-chevron-right
+            v-list-item(v-else to="/login")
               span 個人頁面
               v-spacer
               v-icon.iconcircle mdi-chevron-right
