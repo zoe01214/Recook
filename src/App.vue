@@ -27,11 +27,9 @@
               span.subtitle-1.font-weight-bold.black--text ✌️ 登入
       v-card.rounded-xl.vh-100
         v-sheet.px-3.px-sm-6
-          router-link.d-flex.d-md-none.justify-center.pt-12.mb-n12(to='/')
-            v-img(contain max-width="60" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
           v-sheet.white.py-12.d-flex.justify-center.align-center.rounded-xl#mainmenu
-            v-container(fluid).px-lg-12.d-none.d-md-flex
-              v-row.align-center
+            v-container(fluid).px-lg-12
+              v-row.d-flex.align-center
                 v-col(cols="5").d-none.d-md-flex
                   nav.d-flex.align-center
                     router-link(to="/recipes")
@@ -40,9 +38,9 @@
                       div.navlist(:class="tabActive('/posts')") 料理生活
                     router-link(:to="'/products'")
                       div.navlist(:class="tabActive('/products')") 主廚市集
-                v-col(cols="2")
+                v-col(cols="12" md="2")
                   router-link.d-flex.justify-center(to='/')
-                      v-img(contain max-width="150" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+                      img.w-50(:src="require('./assets/logotext.svg')" @click="nowtab = '/'")
                 v-col(cols="5").d-none.d-md-flex.justify-end
                   nav.d-flex.align-center.justify-end
                     router-link(to="/recipes")
