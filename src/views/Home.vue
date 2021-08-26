@@ -56,7 +56,7 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
       splide-slide(v-for="(post,index) in posts" :key="post._id")
         v-card(flat).text-center.bgtrans
           router-link(:to="'/post/' + post._id")
-          v-sheet(height="320px").bg-white-2.pb-2
+          v-shee.bg-white-2.pb-2
             v-sheet(width="100%")
               img.rounded.rwdimg(:src="post.image[0]")
             v-sheet.rounded-lg.bg-white-2.pa-3.pa-md-6.px-lg-12.text-left.bgtrans.d-flex.flex-column.justify-center
@@ -82,8 +82,8 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
           v-card(flat).text-center.bgtrans
             v-row
               v-col(cols="4" md="5")
-                v-sheet(width="100%").bgtrans.d-flex.justify-center
-                  img.rwdimgcircle(:src="product.image[0]")
+                v-sheet(height="100%").d-flex.justify-center.algin-center
+                  img.rwdimg-wd.rounded-lg(:src="product.image[0]")
               v-col(cols="8" md="7")
                 v-sheet(height="100%").pa-2.text-left.bgtrans.d-flex.flex-column.justify-center
                   v-divider.my-3
