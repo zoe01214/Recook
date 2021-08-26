@@ -1,7 +1,7 @@
 <template lang="pug">
 v-card#recipecard(flat)
   router-link(:to="'/recipe/' + recipe._id")
-    v-img.rounded-lg.imgheight.draktop(:src="recipe.image[0]")
+    v-img.rounded-lg.imgheight(:src="recipe.image[0]")
       div.d-flex.align-center
         v-btn(x-small fab icon @click.prevent="sendlike")
           v-icon.white--text {{likeicon}}

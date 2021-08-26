@@ -29,7 +29,7 @@
         v-sheet.px-3.px-sm-6
           v-sheet.white.py-12.d-flex.justify-center.align-center.rounded-xl#mainmenu
             v-container(fluid).px-lg-12
-              v-row.d-flex.align-center
+              v-row.align-center
                 v-col(cols="5").d-none.d-md-flex
                   nav.d-flex.align-center
                     router-link(to="/recipes")
@@ -40,7 +40,7 @@
                       div.navlist(:class="tabActive('/products')") 主廚市集
                 v-col(cols="12" md="2")
                   router-link.d-flex.justify-center(to='/')
-                      img.w-50(:src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+                      img.imgfixed(:src="require('./assets/logotext-png-120.png')" @click="nowtab = '/'")
                 v-col(cols="5").d-none.d-md-flex.justify-end
                   nav.d-flex.align-center.justify-end
                     router-link(to="/recipes")
