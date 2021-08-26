@@ -29,9 +29,11 @@
         v-sheet.px-3.px-sm-6
           v-sheet.white.py-12.d-flex.justify-center.align-center.rounded-xl#mainmenu
             v-container(fluid).px-lg-12
-              v-row.d-flex.align-center
-                v-col(cols="12").d-flex.justify-center.d-md-none
-                  v-img.d-md-none(contain max-width="85" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+              v-row
+                v-col(cols="12").text-center.pa-0.d-md-none
+                  router-link.d-flex.justify-center(to='/')
+                      v-img(cover max-width="100" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+              v-row.align-center.d-none.d-md-flex
                 v-col(cols="5").d-none.d-md-flex
                   nav.d-flex.align-center
                     router-link(to="/recipes")
@@ -40,7 +42,7 @@
                       div.navlist(:class="tabActive('/posts')") 料理生活
                     router-link(:to="'/products'")
                       div.navlist(:class="tabActive('/products')") 主廚市集
-                v-col(cols="2").d-none.d-md-flex
+                v-col(cols="2")
                   router-link.d-flex.justify-center(to='/')
                       v-img(contain max-width="150" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
                 v-col(cols="5").d-none.d-md-flex.justify-end
