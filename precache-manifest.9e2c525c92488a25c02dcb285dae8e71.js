@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/accountmanage~ordermanage~postmanage~productmanage~recipemanage~reportmanage.f3740a26.css"
   },
   {
-    "revision": "c8ee6c471ef9ee25bbdc",
+    "revision": "8e4553a61ca89ff3bbc1",
     "url": "css/app.ee43599d.css"
   },
   {
@@ -224,7 +224,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/unionpay.7d585d0b.png"
   },
   {
-    "revision": "948f816cb49aa1a2671dd1e2bf3837a0",
+    "revision": "2f03afdf72b64bc16ac32569a49122d8",
     "url": "index.html"
   },
   {
@@ -252,8 +252,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/admin.79e6cbf9.js"
   },
   {
-    "revision": "c8ee6c471ef9ee25bbdc",
-    "url": "js/app.5b376b3b.js"
+    "revision": "8e4553a61ca89ff3bbc1",
+    "url": "js/app.ed92849e.js"
   },
   {
     "revision": "4f083c9d6782836f64a5",
