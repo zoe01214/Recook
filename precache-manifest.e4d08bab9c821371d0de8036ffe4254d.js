@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/accountmanage~ordermanage~postmanage~productmanage~recipemanage~reportmanage.f3740a26.css"
   },
   {
-    "revision": "9fd098cafda0bc28a0c4",
-    "url": "css/app.ee43599d.css"
+    "revision": "61e3fb658a2b96ce9065",
+    "url": "css/app.ad636070.css"
   },
   {
     "revision": "84ed629aa85a500d38a9",
@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/reportmanage.12a767db.css"
   },
   {
-    "revision": "ffd34066d0b20de3de0a",
+    "revision": "4b22aa8ee356670ab84a",
     "url": "css/userpage.70a8a29d.css"
   },
   {
@@ -180,6 +180,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/iconfont.a5b5d416.svg"
   },
   {
+    "revision": "0ca5c71e08f38669fea27c4160059eb4",
+    "url": "img/logotext-png-120.0ca5c71e.png"
+  },
+  {
     "revision": "f3226138652ec70d47ce6247ba506bb9",
     "url": "img/logotext.f3226138.svg"
   },
@@ -224,7 +228,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/unionpay.7d585d0b.png"
   },
   {
-    "revision": "8fc132b3afa17baed0f824ce79e30037",
+    "revision": "56175eaa98b843212f69df7e00a3c9e4",
     "url": "index.html"
   },
   {
@@ -252,8 +256,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/admin.79e6cbf9.js"
   },
   {
-    "revision": "9fd098cafda0bc28a0c4",
-    "url": "js/app.082a009d.js"
+    "revision": "61e3fb658a2b96ce9065",
+    "url": "js/app.fc24905e.js"
   },
   {
     "revision": "4f083c9d6782836f64a5",
@@ -340,8 +344,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/reportmanage.61f5eee4.js"
   },
   {
-    "revision": "ffd34066d0b20de3de0a",
-    "url": "js/userpage.c5b5a5eb.js"
+    "revision": "4b22aa8ee356670ab84a",
+    "url": "js/userpage.08376740.js"
   },
   {
     "revision": "43d51f76a826417ea66548f439c831c1",
