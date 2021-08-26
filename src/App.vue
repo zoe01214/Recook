@@ -40,7 +40,7 @@
                       div.navlist(:class="tabActive('/products')") 主廚市集
                 v-col(cols="12" md="2")
                   router-link.d-flex.justify-center(to='/')
-                      v-img(contain max-width="120" :src="require('./assets/logotext-outline.svg')" @click="nowtab = '/'")
+                      v-img(contain max-width="120" :src="require('./assets/logotext.png')" @click="nowtab = '/'")
                 v-col(cols="5").d-none.d-md-flex.justify-end
                   nav.d-flex.align-center.justify-end
                     router-link(to="/recipes")
