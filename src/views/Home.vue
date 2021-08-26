@@ -4,7 +4,7 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
     div.d-flex.flex-column.align-center.justify-center.mb-3.py-lg-8
       p.black--text.font-title.mb-12 分享食譜建立屬於您的食譜社群
       router-link(to="/about")
-        p.underline.font-subtitle.mr-3 前往了解
+        p.underline.font-subtitle 前往了解
   v-sheet.mx-3.mx-lg-10.rounded-xl.py-12
     v-row
         v-col(cols="12" sm="6")
