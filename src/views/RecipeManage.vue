@@ -35,8 +35,8 @@ v-container#eecipemanage.pa-4
                     //- 單圖檔上傳
                     //- img-inputer(v-model="form.image" theme="dark" size="large" placeholder="點擊或拖曳選擇圖片" bottom-text="點擊或拖曳以修改")
                   template
-                    draggable(v-model="image" @start="dragging = true" @end="dragging = false")
-                      v-sheet.bg-white-2.imagecard(width="25%" v-for="(item,index) of image" :key="item")
+                    draggable(v-model="image" @start="dragging = true" @end="dragging = false").d-flex
+                      v-sheet.bg-white-2.imagecard.pa-1(width="25%" v-for="(item,index) of image" :key="item")
                         v-img.rounded(height="200" :src="item")
                         v-btn.btnclose(icon @click="delimage(index)" absolute top right)
                           v-icon.white--text.text-subtitle-2 mdi-close

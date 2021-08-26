@@ -115,7 +115,7 @@ v-container(fluid)#recipeinfo.pa-0.px-lg-12.mb-12
               v-avatar.d-flex.mr-3(v-if="item.users.avatar !== undefined && item.users.avatar.length > 0 && item.users.avatar !== ''" :size="avatar.size-20")
                 img(:src="item.users.avatar")
               avatar.d-flex.mr-3(v-else :size="avatar.size-20" :name="item.users.account" :variant="avatar.variant" :colors="avatar.colors")
-              h3.black--text {{ (item.users.username !== undefined && item.users.username > 0) ? item.users.username : item.users.account}}
+              h3.black--text {{ item.users.username }}
               v-spacer
               v-menu(offset-y)
                 template(v-slot:activator="{ on, attrs }")

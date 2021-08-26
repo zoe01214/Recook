@@ -32,8 +32,8 @@ v-container#new(fluid).pa-0.px-lg-12.mb-12
             p.font-h3 上傳食譜圖片
             v-divider.my-3
             template
-              draggable(v-model="image" @start="dragging = true" @end="dragging = false")
-                v-sheet.bg-white-2.imagecard(width="25%" v-for="(item,index) of image" :key="item")
+              draggable(v-model="image" @start="dragging = true" @end="dragging = false").d-flex
+                v-sheet.bg-white-2.imagecard.pa-1(width="25%" v-for="(item,index) of image" :key="item")
                   v-img.rounded(height="200" :src="item")
                   v-btn.btnclose(icon @click="delimage(index)" absolute top right)
                     v-icon.white--text.text-subtitle-2 mdi-close
