@@ -27,12 +27,11 @@
               span.subtitle-1.font-weight-bold.black--text ✌️ 登入
       v-card.rounded-xl.vh-100
         v-sheet.px-3.px-sm-6
+          router-link.d-flex.d-md-none.justify-center.pt-12.mb-n12(to='/')
+            v-img(contain max-width="60" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
           v-sheet.white.py-12.d-flex.justify-center.align-center.rounded-xl#mainmenu
-            v-container(fluid).px-lg-12
-              v-row
-                v-col(cols="12").text-center.pa-0.d-md-none.d-flex.justify-center
-                  v-img(max-width="100" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
-              v-row.align-center.d-none.d-md-flex
+            v-container(fluid).px-lg-12.d-none.d-md-flex
+              v-row.align-center
                 v-col(cols="5").d-none.d-md-flex
                   nav.d-flex.align-center
                     router-link(to="/recipes")
