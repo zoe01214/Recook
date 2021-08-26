@@ -30,9 +30,8 @@
           v-sheet.white.py-12.d-flex.justify-center.align-center.rounded-xl#mainmenu
             v-container(fluid).px-lg-12
               v-row
-                v-col(cols="12").text-center.pa-0.d-md-none
-                  router-link.d-flex.justify-center(to='/')
-                      v-img(cover max-width="100" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+                v-col(cols="12").text-center.pa-0.d-md-none.d-flex.justify-center
+                  v-img(max-width="100" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
               v-row.align-center.d-none.d-md-flex
                 v-col(cols="5").d-none.d-md-flex
                   nav.d-flex.align-center
