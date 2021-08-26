@@ -54,15 +54,14 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
         v-icon.iconcircle mdi-chevron-right
     splide(:slides="posts" :options="options3")
       splide-slide(v-for="(post,index) in posts" :key="post._id")
-        v-card(flat)#postcard.text-center.bgtrans
+        v-card(flat).text-center.bgtrans
           router-link(:to="'/post/' + post._id")
-            v-row
-              v-col(cols="12")
-                v-sheet.bgtrans.d-flex.justify-center
-                  img.rounded-lg(width="100%" :src="post.image[0]")
-                v-sheet().rounded-lg.bg-white-2.pa-3.pa-md-6.px-lg-12.pt-6.text-left.bgtrans.d-flex.flex-column.justify-center
-                  v-sheet.rounded.mb-4.tag.text-center {{post.type}}
-                  h3.mb-2.ptitle {{post.title}}
+          v-sheet(height="300px")
+              v-sheet(width="100%")
+                img.rounded.rwdimg(:src="post.image[0]")
+              v-sheet.rounded-lg.bg-white-2.pa-3.pa-md-6.px-lg-12.text-left.bgtrans.d-flex.flex-column.justify-center
+                v-sheet.rounded.mb-4.tag.text-center {{post.type}}
+                h3.mb-2.ptitle {{post.title}}
   v-sheet.mx-3.mx-lg-10.rounded-xl.py-12
     v-row
         v-col(cols="12")
@@ -83,8 +82,8 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
           v-card(flat).text-center.bgtrans
             v-row
               v-col(cols="4" md="5")
-                v-sheet.bgtrans.d-flex.justify-center
-                  img.rounded-lg.circle(width="100%" :src="product.image[0]")
+                v-sheet(width="100%").bgtrans.d-flex.justify-center
+                  img.rounded-lg.rwdimg(:src="product.image[0]")
               v-col(cols="8" md="7")
                 v-sheet(height="100%").pr-12.text-left.bgtrans.d-flex.flex-column.justify-center
                   v-divider.my-3
