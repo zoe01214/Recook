@@ -1,10 +1,10 @@
 <template lang="pug">
 v-container(fluid)#home.pa-0.px-lg-12.mb-12
-  v-sheet.mx-3.mx-lg-10.rounded-xl.mt-3.mb-12
+  v-sheet.mx-3.mx-lg-10.rounded-xl.mt-3.mb-sm-3.mb-md-12
     div.d-flex.flex-column.align-center.justify-center.mb-3.py-lg-8
-      p.black--text.text-h4.mb-12 分享食譜建立屬於您的食譜社群
+      p.black--text.font-title.mb-12 分享食譜建立屬於您的食譜社群
       router-link(to="/about")
-        p.underline.mr-3 前往了解
+        p.underline.font-subtitle.mr-3 前往了解
   v-sheet.mx-3.mx-lg-10.rounded-xl.py-12
     v-row
         v-col(cols="12" sm="6")
@@ -19,20 +19,20 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
                   span.black--text.header-title 分享生活
   v-sheet.mx-3.mx-lg-10.rounded-xl.mt-3.mb-12
     div.d-flex.align-center.mb-3
-      p.text-h4 熱門食譜
+      p.font-title 熱門食譜
       v-spacer
       router-link(to="/recipes")
-        span.black--text.mr-3.font-weight-bold 展示更多
+        span.mr-3.font-link 展示更多
         v-icon.iconcircle mdi-chevron-right
     splide(:slides="recipes" :options="options")
       splide-slide(v-for="(recipe,index) in recipes" :key="recipe._id")
         RecipeCard(:recipe="recipe" :nowuser="nowuser" @sendlike="likes(index)" @sendfav="favorites(index)")
   v-sheet.mx-3.mx-lg-10.rounded-xl.mt-12.pt-8.mb-12
     div.d-flex.align-center.mb-3
-      p.text-h4 人氣主廚
+      p.font-title 人氣主廚
       v-spacer
       router-link(to="/recipes")
-        span.black--text.mr-3.font-weight-bold 展示更多
+        span.mr-3.font-link 展示更多
         v-icon.iconcircle mdi-chevron-right
     splide(:slides="users" :options="options1")
       splide-slide(v-for="(user,index) in users" :key="user._id")
@@ -47,20 +47,22 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
             div.single-line.text-subtitle-1.grey--text.mt-n2 {{ user.recipenum }} 道食譜 {{user.followernum}} 位粉絲
   v-sheet.mx-3.mx-lg-10.rounded-xl.mt-3.mb-12.pt-8
     div.d-flex.align-center.mb-3
-      p.text-h4 生活資訊
+      p.font-title 生活資訊
       v-spacer
       router-link(to="/posts")
-        span.black--text.mr-3.font-weight-bold 展示更多
+        span.mr-3.font-link 展示更多
         v-icon.iconcircle mdi-chevron-right
     splide(:slides="posts" :options="options3")
       splide-slide(v-for="(post,index) in posts" :key="post._id")
         v-card(flat)#postcard.text-center.bgtrans
           router-link(:to="'/post/' + post._id")
-            v-sheet.bgtrans.d-flex.justify-center
-              img.rounded-lg(width="100%" :src="post.image[0]")
-            v-sheet.rounded-lg.bg-white-2.pa-6.px-lg-12.pt-6.text-left.bgtrans.d-flex.flex-column.justify-center
-              v-sheet.rounded.mb-4.tag.text-center {{post.type}}
-              h3.mb-2.ptitle {{post.title}}
+            v-row
+              v-col(cols="12")
+                v-sheet.bgtrans.d-flex.justify-center
+                  img.rounded-lg(width="100%" :src="post.image[0]")
+                v-sheet().rounded-lg.bg-white-2.pa-3.pa-md-6.px-lg-12.pt-6.text-left.bgtrans.d-flex.flex-column.justify-center
+                  v-sheet.rounded.mb-4.tag.text-center {{post.type}}
+                  h3.mb-2.ptitle {{post.title}}
   v-sheet.mx-3.mx-lg-10.rounded-xl.py-12
     v-row
         v-col(cols="12")
@@ -70,20 +72,20 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
                 span.black--text.header-title 主廚市集
   v-sheet.mx-3.mx-lg-10.rounded-xl.mt-3.mb-12.pb-12
     div.d-flex.align-center.mb-3.pb-3
-      p.text-h4 最新商品
+      p.font-title 最新商品
       v-spacer
       router-link(to="/products")
-        span.black--text.mr-3.font-weight-bold 展示更多
+        span.mr-3.font-link 展示更多
         v-icon.iconcircle mdi-chevron-right
     splide(:slides="products" :options="options2")
       splide-slide(v-for="(product,index) in products" :key="product._id")
         router-link(:to="'/products/' + product._id").d-flex.justify-center
           v-card(flat).text-center.bgtrans
             v-row
-              v-col(cols="6")
+              v-col(cols="4" md="5")
                 v-sheet.bgtrans.d-flex.justify-center
                   img.rounded-lg.circle(width="100%" :src="product.image[0]")
-              v-col(cols="6")
+              v-col(cols="8" md="7")
                 v-sheet(height="100%").pr-12.text-left.bgtrans.d-flex.flex-column.justify-center
                   v-divider.my-3
                   div.mb-2.name.single-line {{product.name}}
@@ -91,18 +93,18 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
   v-divider.py-6
   v-sheet.mx-3.mx-lg-10.rounded-xl.mt-3.mb-12
     router-link(to="/register").d-flex.align-center.mb-3.py-lg-8
-      p.black--text.text-h4 參與料理盛事
+      p.black--text.font-title 參與料理盛事
       v-spacer
       div
-        span.black--text.mr-3.font-weight-bold 前往註冊
+        span.mr-3.font-link 前往註冊
         v-icon.iconcircle mdi-chevron-right
   v-divider.py-6
   v-sheet.mx-3.mx-lg-10.rounded-xl.mt-3.mb-12
     router-link(to="/about").d-flex.align-center.mb-3.py-lg-8
-      p.black--text.text-h4 關於我們
+      p.black--text.font-title 關於我們
       v-spacer
       div
-        span.black--text.mr-3.font-weight-bold 前往了解
+        span.mr-3.font-link 前往了解
         v-icon.iconcircle mdi-chevron-right
   v-divider.py-6
   loading(:height="45" :width="45" :active.sync="isLoading")
@@ -172,7 +174,7 @@ export default {
         cover: true,
         breakpoints: {
           860: {
-            perPage: 2
+            perPage: 1
           },
           1280: {
             perPage: 3

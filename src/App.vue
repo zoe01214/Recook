@@ -26,11 +26,11 @@
           v-btn(v-else small color="grey" outlined to="/login")
               span.subtitle-1.font-weight-bold.black--text ✌️ 登入
       v-card.rounded-xl.vh-100
-        v-sheet.px-6.px-lg-10
+        v-sheet.px-3.px-sm-6.px-lg-10
           v-sheet.white.py-12.d-flex.align-center.navshadow#mainmenu
             v-container(fluid).px-lg-12
               v-row.d-flex.align-center
-                v-col(cols="5")
+                v-col(cols="4" md="5")
                   nav.d-none.d-md-flex.align-center
                     router-link(to="/recipes")
                       div.navlist(:class="tabActive('/recipes')") 探索食譜
@@ -38,10 +38,10 @@
                       div.navlist(:class="tabActive('/posts')") 料理生活
                     router-link(:to="'/products'")
                       div.navlist(:class="tabActive('/products')") 主廚市集
-                v-col(cols="2")
+                v-col(cols="4"  md="2")
                   router-link.d-flex.justify-center(to='/')
-                    v-img(contain max-width="120" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
-                v-col(cols="5")
+                      v-img.logotext(contain width="100%" max-width="180" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+                v-col(cols="4"  md="5")
                   nav.d-none.d-md-flex.align-center.justify-end
                     router-link(to="/recipes")
                       v-icon.black--text mdi-magnify

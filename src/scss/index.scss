@@ -91,6 +91,41 @@ div[role=menu] {
   }
 }
 
+.font-title{
+  font-size: 2rem;
+}
+
+.font-subtitle{
+  font-size: 1.3rem;
+}
+
+.font-link{
+  font-size: 1rem;
+  color: black;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+.font-link:hover{
+  font-size: 1rem;
+  color:rgb(141, 141, 141);
+}
+
+@media (max-width: 600px) {
+  .font-title{
+    font-size: 1.5rem;
+  }
+  
+  .font-subtitle{
+    font-size: 1.2rem;
+  }
+  
+  .font-link{
+    font-size: 1rem;
+    color: black;
+    font-weight: 500;
+  }
+}
+
 #app{
   // register, login 頁面共用 btn
   .loginbtn{

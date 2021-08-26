@@ -3,7 +3,7 @@ v-container(fluid)#posts.pa-0.px-lg-12.mb-12
   v-sheet.mx-3.px-lg-12.d-flex.align-center.mb-12
     h2.header-title.mr-6 料理生活
     v-divider
-  v-sheet.mx-3.mx-lg-10.pa-8.rounded-xl.bg-white-2.mt-12
+  v-sheet.mx-3.mx-lg-10.pa-3.pa-lg-8.rounded-xl.bg-white-2.mt-12
     v-row.py-5
       v-col.mb-12(cols="12" md="6" lg="4" v-for="item of posts" :key="item._id" v-if="item.isEnabled === 1")
         router-link(:to="'/post/' + item._id")
@@ -12,7 +12,8 @@ v-container(fluid)#posts.pa-0.px-lg-12.mb-12
             div.pa-6.text-center
               v-sheet.rounded.mx-12.mb-4.tag {{item.type}}
               h3.mb-2.ptitle {{item.title}}
-              div.content(v-html="item.content")
+              div.d-none.d-lg-flex
+                div.content(v-html="item.content")
   loading(:height="45" :width="45" :active.sync="isLoading")
 </template>
 
