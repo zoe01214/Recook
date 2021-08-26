@@ -52,7 +52,7 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
       router-link(to="/posts")
         span.mr-3.font-link 展示更多
         v-icon.iconcircle mdi-chevron-right
-    splide(:slides="posts" :options="options3")
+    splide(:slides="posts" :options="options2")
       splide-slide(v-for="(post,index) in posts" :key="post._id")
         v-card(flat).text-center.bgtrans
           router-link(:to="'/post/' + post._id")
@@ -79,13 +79,13 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
     splide(:slides="products" :options="options2")
       splide-slide(v-for="(product,index) in products" :key="product._id")
         router-link(:to="'/products/' + product._id").d-flex.justify-center
-          v-card(flat).text-center.bgtrans
+          v-card(flat width="100%").text-center
             v-row
               v-col(cols="4" md="5")
-                v-sheet(height="100%").d-flex.justify-center.algin-center
-                  img.rwdimg-wd.rounded-lg(:src="product.image[0]")
+                v-sheet().d-flex.justify-center.algin-center
+                  v-img.circle.rounded-lg(contain :src="product.image[0]")
               v-col(cols="8" md="7")
-                v-sheet(height="100%").pa-2.text-left.bgtrans.d-flex.flex-column.justify-center
+                v-sheet(height="100%").pa-2.text-left.d-flex.flex-column.justify-center
                   v-divider.my-3
                   div.mb-2.name.single-line {{product.name}}
                   div.mb-5.text-subtitle-1.shcut {{product.shortcut}}
@@ -163,20 +163,6 @@ export default {
           },
           1280: {
             perPage: 2
-          }
-        }
-      },
-      options3: {
-        rewind: true,
-        gap: '1rem',
-        perPage: 3,
-        cover: true,
-        breakpoints: {
-          860: {
-            perPage: 1
-          },
-          1280: {
-            perPage: 3
           }
         }
       },

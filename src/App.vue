@@ -28,8 +28,7 @@
       v-card.rounded-xl.vh-100
         v-sheet.px-3.px-sm-6.px-lg-10
           v-sheet.white.py-12.d-flex.align-center.navshadow#mainmenu
-            v-container.d-md-none.d-flex.justify-center
-              v-img(contain max-height="45" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+            v-img.d-md-none(contain max-height="45" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
             v-container(fluid).px-lg-12.d-none.d-md-flex
               v-row.d-flex.align-center
                 v-col(cols="5")
