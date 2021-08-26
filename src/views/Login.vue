@@ -6,7 +6,7 @@ v-container#login(fluid).pa-0.px-lg-12
   v-sheet.mx-3.mx-lg-10.pa-5.pa-lg-8.rounded-xl.bg-white-2.mt-12
     v-card(flat max-width="550px").bg-white-2.text-center.bgtrans.mx-auto.pa-lg-12
       v-form(ref="form" lazy-validation width="100%" @submit.prevent="submit")
-        h2.pb-6 歡迎回到 RECOOK
+        div.font-h2.pb-6 歡迎回到 RECOOK
         v-text-field.pa-2(color="#DEA56A" v-model="form.account"  :rules="state.account" :counter="20" label="account" placeholder="請輸入帳號" required)
         v-text-field.pa-2(color="#DEA56A" v-model="form.password" :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" @click:append="show1 = !show1"  :rules="state.password" :counter="20" label="password" placeholder="請輸入密碼" required)
         p.text-center

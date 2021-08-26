@@ -56,12 +56,12 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
       splide-slide(v-for="(post,index) in posts" :key="post._id")
         v-card(flat).text-center.bgtrans
           router-link(:to="'/post/' + post._id")
-          v-shee.bg-white-2.pb-2
-            v-sheet(width="100%")
-              img.rounded.rwdimg(:src="post.image[0]")
-            v-sheet.rounded-lg.bg-white-2.pa-3.pa-md-6.px-lg-12.text-left.bgtrans.d-flex.flex-column.justify-center
-              v-sheet.rounded.mb-4.tag.text-center {{post.type}}
-              h3.ptitle {{post.title}}
+            v-sheet.bg-white-2.pb-2
+              v-sheet(width="100%")
+                img.rounded.rwdimg(:src="post.image[0]")
+              v-sheet.rounded-lg.bg-white-2.pa-3.pa-md-6.px-lg-12.text-left.bgtrans.d-flex.flex-column.justify-center
+                v-sheet.rounded.mb-4.tag.text-center {{post.type}}
+                h3.ptitle {{post.title}}
   v-sheet.mx-3.mx-lg-10.rounded-xl.py-12
     v-row
         v-col(cols="12")

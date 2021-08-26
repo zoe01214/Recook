@@ -27,8 +27,9 @@
               span.subtitle-1.font-weight-bold.black--text ✌️ 登入
       v-card.rounded-xl.vh-100
         v-sheet.px-3.px-sm-6.px-lg-10
-          v-sheet.white.py-12.d-flex.align-center.navshadow#mainmenu
-            v-img.d-md-none(contain max-height="45" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
+          v-sheet.white.py-12.d-flex.justify-center.align-center.rounded-xl#mainmenu
+            v-sheet(width="100%" height="45px").text-center.d-md-none
+              img.d-md-none(height="45px" :src="require('./assets/logotext.svg')" @click="nowtab = '/'")
             v-container(fluid).px-lg-12.d-none.d-md-flex
               v-row.d-flex.align-center
                 v-col(cols="5")

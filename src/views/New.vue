@@ -16,7 +16,8 @@ v-container#new(fluid).pa-0.px-lg-12.mb-12
                   v-icon mdi-book-open-outline
                 v-btn.mr-12.typebtn(outlined icon :class="typeclass('video')" @click="form.type = 'video'" x-large)
                   v-icon mdi-television-classic
-                v-text-field(outlined color="#DEA56A" v-if="form.type === 'video'" required :rules="ValidYouTubeLink (form.video)" v-model="form.video" placeholder="YOUTUBE 影片連結，例如：https://www.youtube.com/watch?v=E3kREFb3vHg")
+                v-text-field.d-none.d-md-flex(outlined color="#DEA56A" v-if="form.type === 'video'" required :rules="ValidYouTubeLink (form.video)" v-model="form.video" placeholder="YOUTUBE 影片連結，例如：https://www.youtube.com/watch?v=E3kREFb3vHg")
+              v-text-field.mt-3.d-md-none(outlined color="#DEA56A" v-if="form.type === 'video'" required :rules="ValidYouTubeLink (form.video)" v-model="form.video" placeholder="YOUTUBE 影片連結，例如：https://www.youtube.com/watch?v=E3kREFb3vHg")
           div
             p.font-h3 你的食譜應該叫什麼？
             v-text-field(outlined color="#DEA56A" v-model="form.name" :rules="state.name" :counter="15" placeholder="例如：和風蒜蝦義大利麵" required)

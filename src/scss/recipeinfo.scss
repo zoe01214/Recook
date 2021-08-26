@@ -3,11 +3,6 @@
   .v-carousel__controls {
     pointer-events: none;
   }
-  @media (max-width: 600px) {
-    .v-carousel,iframe {
-      max-height: 32vh;
-    }
-  }
   .imgfixed{
     position: fixed;
     top: 50%;
