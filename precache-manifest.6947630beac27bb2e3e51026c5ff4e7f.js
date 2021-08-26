@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/accountmanage~ordermanage~postmanage~productmanage~recipemanage~reportmanage.f3740a26.css"
   },
   {
-    "revision": "c2d5c9c52c0314db3111",
+    "revision": "54cbdb5bbde024032d22",
     "url": "css/app.86ee6f29.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/chunk-vendors.a5a47365.css"
   },
   {
-    "revision": "3d52d3e4be8c0da473dd",
+    "revision": "976f22eeb4ac44772c40",
     "url": "css/editrecipe.16619009.css"
   },
   {
@@ -44,7 +44,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/questions.606a46d3.css"
   },
   {
-    "revision": "a2a6b1cf813ba12b1908",
+    "revision": "9ec215e2a5ca368116d1",
     "url": "css/recipeinfo.7d8553dc.css"
   },
   {
@@ -52,7 +52,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/recipeinfo~userpage.8951a586.css"
   },
   {
-    "revision": "35ae9ab372a23ba2a080",
+    "revision": "bffc96c649ec906ae262",
     "url": "css/recipemanage.3a7d9f72.css"
   },
   {
@@ -224,7 +224,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/unionpay.7d585d0b.png"
   },
   {
-    "revision": "3095c2155ebf4adfb77bbd3704c67bec",
+    "revision": "23004d3f6803fa8b2d0701d4c020a298",
     "url": "index.html"
   },
   {
@@ -252,8 +252,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/admin.79e6cbf9.js"
   },
   {
-    "revision": "c2d5c9c52c0314db3111",
-    "url": "js/app.a4c059d9.js"
+    "revision": "54cbdb5bbde024032d22",
+    "url": "js/app.6645453d.js"
   },
   {
     "revision": "4f083c9d6782836f64a5",
@@ -268,8 +268,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/chunk-vendors.166af550.js"
   },
   {
-    "revision": "3d52d3e4be8c0da473dd",
-    "url": "js/editrecipe.59cf1362.js"
+    "revision": "976f22eeb4ac44772c40",
+    "url": "js/editrecipe.0438e490.js"
   },
   {
     "revision": "3388ac88d54a2a309bf5",
@@ -316,16 +316,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/questions.82ef3a56.js"
   },
   {
-    "revision": "a2a6b1cf813ba12b1908",
-    "url": "js/recipeinfo.cee223bf.js"
+    "revision": "9ec215e2a5ca368116d1",
+    "url": "js/recipeinfo.e6ac205c.js"
   },
   {
     "revision": "19a83ff4ca3b7f89ba69",
     "url": "js/recipeinfo~userpage.eb5ef454.js"
   },
   {
-    "revision": "35ae9ab372a23ba2a080",
-    "url": "js/recipemanage.08e80b53.js"
+    "revision": "bffc96c649ec906ae262",
+    "url": "js/recipemanage.4719f1f4.js"
   },
   {
     "revision": "ff7303edb7f69e29c024",
