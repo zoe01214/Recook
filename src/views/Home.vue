@@ -83,7 +83,7 @@ v-container(fluid)#home.pa-0.px-lg-12.mb-12
             v-row
               v-col(cols="4" md="5")
                 v-sheet().d-flex.justify-center.algin-center
-                  v-img.circle.rounded-lg(contain :src="product.image[0]")
+                  img.circle.rounded-lg(max-height="140" :src="product.image[0]")
               v-col(cols="8" md="7")
                 v-sheet(height="100%").pa-2.text-left.d-flex.flex-column.justify-center
                   v-divider.my-3
