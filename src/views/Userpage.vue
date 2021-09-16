@@ -42,6 +42,8 @@ v-container(fluid)#userpage.pa-0.px-lg-12.mb-12
                           @updatefiles="handleFilePondUpdateFile")
                         v-btn(text @click="cancelupload")
                           span.font-h4 取消
+                      div.text-center(v-if="showpond")
+                        span.text-caption.red--text *未選擇照片將改回預設頭像，如果不想更動請點擊取消
                       div.text-center(v-else)
                         div.pointer.d-flex.justify-center.mb-3
                           v-avatar(v-if="author.avatar" :size="100")
