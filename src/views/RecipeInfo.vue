@@ -3,7 +3,7 @@ v-container(fluid)#recipeinfo.pa-0.px-lg-12.mb-12
   v-sheet.mx-3.mx-lg-10.rounded-xl.mt-3.mb-12
     v-row.trigger
       v-col(cols="12" lg="4").order-lg-2.d-none.d-lg-flex.justify-end
-        v-sheet(width="380px").imgfixed
+        v-sheet(width="100%").imgfixed
           v-carousel.rounded-lg.mb-3(hide-delimiter-background show-arrows-on-hover max)
             v-carousel-item(
               v-if="recipe.video"
