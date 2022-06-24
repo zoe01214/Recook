@@ -2,20 +2,20 @@
 v-container(fluid)#recipeinfo.pa-0.px-lg-12.mb-12
   v-sheet.mx-3.mx-lg-10.rounded-xl.mt-3.mb-12
     v-row.trigger
-      v-col(cols="12" lg="4").order-lg-2.d-none.d-lg-flex.justify-end
-        v-sheet(width="100%").imgfixed
-          v-carousel.rounded-lg.mb-3(hide-delimiter-background show-arrows-on-hover max)
+      v-col#bigcarousel(cols="12" lg="4").order-lg-2.d-none.d-lg-flex.justify-end.img-container
+        v-sheet(width="100%" v-bind:style="scrollY").imgfixed
+          v-carousel.rounded-lg.mb-3(hide-delimiter-background show-arrows-on-hover max).carousel-height
             v-carousel-item(
               v-if="recipe.video"
               reverse-transition="fade-transition"
-              transition="fade-transition")
+              transition="fade-transition").carousel-height
               iframe(width="100%" height="100%" :src="recipe.video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
             v-carousel-item(
               v-for="(item,idx) in recipe.image"
               :key="idx"
               :src="item"
               reverse-transition="fade-transition"
-              transition="fade-transition")
+              transition="fade-transition").carousel-height
               div.d-flex
                 div.ma-2
                   v-btn(small icon fab @click.prevent="likes")
@@ -221,8 +221,17 @@ export default {
       editdialog: false,
       fab: false,
       isLoading: false,
-      fullPage: true
+      fullPage: true,
+      scrollY: {
+        transform: 'translateY(0px)'
+      }
     }
+  },
+  created () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll)
   },
   computed: {
     likeicon () {
@@ -452,24 +461,22 @@ export default {
         }
       }
     },
-    animation () {
-      gsap.from('.imgfixed', {
-        scrollTrigger: {
-          trigger: '.imgfixed',
-          start: 'top top',
-          end: 'top top',
-          scrub: true
-        },
-        position: 'relative',
-        'max-width': '380px'
-      })
+    handleScroll (event) {
+      if (window.scrollY > 200) {
+        const count = window.scrollY - 200 + 85
+        if (window.scrollY + 450 <= document.getElementById('bigcarousel').offsetHeight) {
+          this.scrollY.transform = 'translateY(' + count + 'px)'
+        }
+      } else {
+        this.scrollY.transform = 'translateY(0px)'
+      }
     }
+
   },
   async mounted () {
     try {
       const vm = this
       vm.isLoading = true
-      this.animation()
       const { data } = await this.axios.get('/recipes/' + this.$route.params.id)
       const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
       this.recipe = data.result

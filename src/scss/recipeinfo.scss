@@ -3,14 +3,22 @@
   .v-carousel__controls {
     pointer-events: none;
   }
+  .img-container{
+    position: relative;
+    transition: 1s ease;
+  }
   .imgfixed{
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 1;
     max-width: 380px;
+    background: transparent;
   }
-  
+  .carousel-height{
+    height: 70vh !important;
+    max-height: 500px;
+  }
   .botnav{
     position:fixed;
     width:90%;
