@@ -376,8 +376,6 @@ export default {
       }
     },
     handleFilePondUpdateFile (files) {
-      console.log(typeof (files[0]))
-      console.log(files[0].file.name)
       this.form.image = files.map(files => files.file)
     },
     typeclass (value) {

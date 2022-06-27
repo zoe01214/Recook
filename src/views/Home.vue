@@ -242,7 +242,6 @@ export default {
         })
       }
       loading().then(result => {
-        console.log(result)
         vm.isLoading = false
       })
       if (this.user.islogin) {
