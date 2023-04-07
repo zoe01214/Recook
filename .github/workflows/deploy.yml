@@ -1,5 +1,5 @@
 # Action 名稱
-name: ReDeploy
+name: Deploy
 # 觸發時機，當推送到分支 master 時
 on:
   push:
