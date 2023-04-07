@@ -304,7 +304,7 @@ export default ({
     this.animation()
     const diff = Date.now() - this.$store.state.jwt.received
     try {
-      if (diff > 1000 * 60 * 60 * 24 * 6 && this.$store.state.jwt) {
+      if (diff > 1000 * 60 * 60 * 24 * 6 && this.$store.state.jwt.token) {
         const { data } = await this.axios.post('/users/extend', {}, {
           headers: {
             authorization: 'Bearer ' + this.$store.state.jwt.token
